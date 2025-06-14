@@ -2,7 +2,7 @@
 
 ## 🔧 Objetivo
 
-Atualizar a placa MCLAB2 V5.0 com um microcontrolador de 32 bits, substituindo o ATmega328P pelo **STM32F401RE**, baseado na arquitetura ARM Cortex-M4.
+Substituir o microcontrolador original da placa MCLAB2 V5.0 (PIC16F877A) por um **STM32F401RE**, modernizando o sistema embarcado para arquitetura ARM Cortex-M4.
 
 ## ⚙️ Atividades Realizadas
 
