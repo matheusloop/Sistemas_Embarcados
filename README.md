@@ -30,13 +30,13 @@ A disciplina é dividida em três etapas principais:
 
 ```bash
 /
-├── retrofit-8bits-atmega328p/
-│   ├── descricao.md
+├── Retrofit_8bits_ATmega328p/
+│   ├── README.md
 │   └── arquivos-fonte/
-├── retrofit-32bits-stm32f401re/
-│   ├── descricao.md
+├── Retrofit-32bits-STM32f401RE/
+│   ├── README.md
 │   └── arquivos-fonte/
-└── aplicacao-final/
-    ├── descricao.md
+└── Aplicacao_Final/
+    ├── README.md
     └── arquivos-fonte/
 
