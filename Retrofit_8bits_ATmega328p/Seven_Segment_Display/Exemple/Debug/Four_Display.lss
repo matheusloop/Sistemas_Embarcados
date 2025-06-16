@@ -1,0 +1,504 @@
+
+Four_Display.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000a  00800100  0000034a  000003be  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000034a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000003c8  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003f8  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000048  00000000  00000000  00000438  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000078d  00000000  00000000  00000480  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000672  00000000  00000000  00000c0d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000052a  00000000  00000000  0000127f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000e4  00000000  00000000  000017ac  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00006d75  00000000  00000000  00001890  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000001bc  00000000  00000000  00008605  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000038  00000000  00000000  000087c1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_macro  000028aa  00000000  00000000  000087f9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   8:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+   c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  10:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  14:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  18:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  1c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  48:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  4c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  50:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  54:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  58:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  5c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  60:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+  64:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ea e4       	ldi	r30, 0x4A	; 74
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 30       	cpi	r26, 0x0A	; 10
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+  8a:	0e 94 fe 00 	call	0x1fc	; 0x1fc <main>
+  8e:	0c 94 a3 01 	jmp	0x346	; 0x346 <_exit>
+
+00000092 <__bad_interrupt>:
+  92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000096 <setupSeg7Display>:
+#include <avr/io.h>
+#include <util/delay.h>
+
+#include "../seg7display/seg7display.h"
+
+void setupSeg7Display() {
+  96:	cf 93       	push	r28
+  98:	df 93       	push	r29
+  9a:	cd b7       	in	r28, 0x3d	; 61
+  9c:	de b7       	in	r29, 0x3e	; 62
+	DDRC = 0xFF;   // PORTC como saída (segmentos)
+  9e:	87 e2       	ldi	r24, 0x27	; 39
+  a0:	90 e0       	ldi	r25, 0x00	; 0
+  a2:	2f ef       	ldi	r18, 0xFF	; 255
+  a4:	fc 01       	movw	r30, r24
+  a6:	20 83       	st	Z, r18
+	DDRB |= 0x0F;  // PB0–PB3 como saída (seleção dos dígitos)
+  a8:	84 e2       	ldi	r24, 0x24	; 36
+  aa:	90 e0       	ldi	r25, 0x00	; 0
+  ac:	24 e2       	ldi	r18, 0x24	; 36
+  ae:	30 e0       	ldi	r19, 0x00	; 0
+  b0:	f9 01       	movw	r30, r18
+  b2:	20 81       	ld	r18, Z
+  b4:	2f 60       	ori	r18, 0x0F	; 15
+  b6:	fc 01       	movw	r30, r24
+  b8:	20 83       	st	Z, r18
+	
+	return;
+  ba:	00 00       	nop
+}
+  bc:	df 91       	pop	r29
+  be:	cf 91       	pop	r28
+  c0:	08 95       	ret
+
+000000c2 <changeSeg7DisplayValue>:
+
+void changeSeg7DisplayValue(uint8_t value) {
+  c2:	cf 93       	push	r28
+  c4:	df 93       	push	r29
+  c6:	cd b7       	in	r28, 0x3d	; 61
+  c8:	de b7       	in	r29, 0x3e	; 62
+  ca:	2b 97       	sbiw	r28, 0x0b	; 11
+  cc:	0f b6       	in	r0, 0x3f	; 63
+  ce:	f8 94       	cli
+  d0:	de bf       	out	0x3e, r29	; 62
+  d2:	0f be       	out	0x3f, r0	; 63
+  d4:	cd bf       	out	0x3d, r28	; 61
+  d6:	8b 87       	std	Y+11, r24	; 0x0b
+	uint8_t LUT[10] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B};  // Segmentos para 0–9
+  d8:	2a e0       	ldi	r18, 0x0A	; 10
+  da:	e0 e0       	ldi	r30, 0x00	; 0
+  dc:	f1 e0       	ldi	r31, 0x01	; 1
+  de:	ce 01       	movw	r24, r28
+  e0:	01 96       	adiw	r24, 0x01	; 1
+  e2:	dc 01       	movw	r26, r24
+  e4:	01 90       	ld	r0, Z+
+  e6:	0d 92       	st	X+, r0
+  e8:	2a 95       	dec	r18
+  ea:	e1 f7       	brne	.-8      	; 0xe4 <changeSeg7DisplayValue+0x22>
+	if (value < 10) {
+  ec:	8b 85       	ldd	r24, Y+11	; 0x0b
+  ee:	8a 30       	cpi	r24, 0x0A	; 10
+  f0:	78 f4       	brcc	.+30     	; 0x110 <changeSeg7DisplayValue+0x4e>
+		PORTC = LUT[value];
+  f2:	88 e2       	ldi	r24, 0x28	; 40
+  f4:	90 e0       	ldi	r25, 0x00	; 0
+  f6:	2b 85       	ldd	r18, Y+11	; 0x0b
+  f8:	22 2f       	mov	r18, r18
+  fa:	30 e0       	ldi	r19, 0x00	; 0
+  fc:	ae 01       	movw	r20, r28
+  fe:	4f 5f       	subi	r20, 0xFF	; 255
+ 100:	5f 4f       	sbci	r21, 0xFF	; 255
+ 102:	24 0f       	add	r18, r20
+ 104:	35 1f       	adc	r19, r21
+ 106:	f9 01       	movw	r30, r18
+ 108:	20 81       	ld	r18, Z
+ 10a:	fc 01       	movw	r30, r24
+ 10c:	20 83       	st	Z, r18
+	}
+	
+	return;
+ 10e:	00 00       	nop
+ 110:	00 00       	nop
+}
+ 112:	2b 96       	adiw	r28, 0x0b	; 11
+ 114:	0f b6       	in	r0, 0x3f	; 63
+ 116:	f8 94       	cli
+ 118:	de bf       	out	0x3e, r29	; 62
+ 11a:	0f be       	out	0x3f, r0	; 63
+ 11c:	cd bf       	out	0x3d, r28	; 61
+ 11e:	df 91       	pop	r29
+ 120:	cf 91       	pop	r28
+ 122:	08 95       	ret
+
+00000124 <enableSeg7Display>:
+
+void enableSeg7Display(uint8_t displayAdress) {
+ 124:	cf 93       	push	r28
+ 126:	df 93       	push	r29
+ 128:	1f 92       	push	r1
+ 12a:	cd b7       	in	r28, 0x3d	; 61
+ 12c:	de b7       	in	r29, 0x3e	; 62
+ 12e:	89 83       	std	Y+1, r24	; 0x01
+	PORTB &= 0xF0;  // Limpa PB0–PB3
+ 130:	85 e2       	ldi	r24, 0x25	; 37
+ 132:	90 e0       	ldi	r25, 0x00	; 0
+ 134:	25 e2       	ldi	r18, 0x25	; 37
+ 136:	30 e0       	ldi	r19, 0x00	; 0
+ 138:	f9 01       	movw	r30, r18
+ 13a:	20 81       	ld	r18, Z
+ 13c:	20 7f       	andi	r18, 0xF0	; 240
+ 13e:	fc 01       	movw	r30, r24
+ 140:	20 83       	st	Z, r18
+	PORTB |= ((1 << displayAdress) & 0x0F);  // Ativa o dígito desejado
+ 142:	85 e2       	ldi	r24, 0x25	; 37
+ 144:	90 e0       	ldi	r25, 0x00	; 0
+ 146:	25 e2       	ldi	r18, 0x25	; 37
+ 148:	30 e0       	ldi	r19, 0x00	; 0
+ 14a:	f9 01       	movw	r30, r18
+ 14c:	20 81       	ld	r18, Z
+ 14e:	62 2f       	mov	r22, r18
+ 150:	29 81       	ldd	r18, Y+1	; 0x01
+ 152:	42 2f       	mov	r20, r18
+ 154:	50 e0       	ldi	r21, 0x00	; 0
+ 156:	21 e0       	ldi	r18, 0x01	; 1
+ 158:	30 e0       	ldi	r19, 0x00	; 0
+ 15a:	02 c0       	rjmp	.+4      	; 0x160 <enableSeg7Display+0x3c>
+ 15c:	22 0f       	add	r18, r18
+ 15e:	33 1f       	adc	r19, r19
+ 160:	4a 95       	dec	r20
+ 162:	e2 f7       	brpl	.-8      	; 0x15c <enableSeg7Display+0x38>
+ 164:	2f 70       	andi	r18, 0x0F	; 15
+ 166:	26 2b       	or	r18, r22
+ 168:	fc 01       	movw	r30, r24
+ 16a:	20 83       	st	Z, r18
+	
+	return;
+ 16c:	00 00       	nop
+}
+ 16e:	0f 90       	pop	r0
+ 170:	df 91       	pop	r29
+ 172:	cf 91       	pop	r28
+ 174:	08 95       	ret
+
+00000176 <cleanSeg7Display>:
+
+void cleanSeg7Display() {
+ 176:	cf 93       	push	r28
+ 178:	df 93       	push	r29
+ 17a:	cd b7       	in	r28, 0x3d	; 61
+ 17c:	de b7       	in	r29, 0x3e	; 62
+	PORTB &= 0xF0;  // Limpa PB0–PB3
+ 17e:	85 e2       	ldi	r24, 0x25	; 37
+ 180:	90 e0       	ldi	r25, 0x00	; 0
+ 182:	25 e2       	ldi	r18, 0x25	; 37
+ 184:	30 e0       	ldi	r19, 0x00	; 0
+ 186:	f9 01       	movw	r30, r18
+ 188:	20 81       	ld	r18, Z
+ 18a:	20 7f       	andi	r18, 0xF0	; 240
+ 18c:	fc 01       	movw	r30, r24
+ 18e:	20 83       	st	Z, r18
+	
+	return;
+ 190:	00 00       	nop
+}
+ 192:	df 91       	pop	r29
+ 194:	cf 91       	pop	r28
+ 196:	08 95       	ret
+
+00000198 <runSeg7Display>:
+
+void runSeg7Display(uint8_t valueDisp_0, uint8_t valueDisp_1, uint8_t valueDisp_2, uint8_t valueDisp_3) {
+ 198:	cf 93       	push	r28
+ 19a:	df 93       	push	r29
+ 19c:	00 d0       	rcall	.+0      	; 0x19e <runSeg7Display+0x6>
+ 19e:	00 d0       	rcall	.+0      	; 0x1a0 <runSeg7Display+0x8>
+ 1a0:	cd b7       	in	r28, 0x3d	; 61
+ 1a2:	de b7       	in	r29, 0x3e	; 62
+ 1a4:	89 83       	std	Y+1, r24	; 0x01
+ 1a6:	6a 83       	std	Y+2, r22	; 0x02
+ 1a8:	4b 83       	std	Y+3, r20	; 0x03
+ 1aa:	2c 83       	std	Y+4, r18	; 0x04
+	
+	cleanSeg7Display();
+ 1ac:	0e 94 bb 00 	call	0x176	; 0x176 <cleanSeg7Display>
+	changeSeg7DisplayValue(valueDisp_0);
+ 1b0:	89 81       	ldd	r24, Y+1	; 0x01
+ 1b2:	0e 94 61 00 	call	0xc2	; 0xc2 <changeSeg7DisplayValue>
+	enableSeg7Display(0);
+ 1b6:	80 e0       	ldi	r24, 0x00	; 0
+ 1b8:	0e 94 92 00 	call	0x124	; 0x124 <enableSeg7Display>
+	
+	cleanSeg7Display();
+ 1bc:	0e 94 bb 00 	call	0x176	; 0x176 <cleanSeg7Display>
+	changeSeg7DisplayValue(valueDisp_1);
+ 1c0:	8a 81       	ldd	r24, Y+2	; 0x02
+ 1c2:	0e 94 61 00 	call	0xc2	; 0xc2 <changeSeg7DisplayValue>
+	enableSeg7Display(1);
+ 1c6:	81 e0       	ldi	r24, 0x01	; 1
+ 1c8:	0e 94 92 00 	call	0x124	; 0x124 <enableSeg7Display>
+	
+	cleanSeg7Display();
+ 1cc:	0e 94 bb 00 	call	0x176	; 0x176 <cleanSeg7Display>
+	changeSeg7DisplayValue(valueDisp_2);
+ 1d0:	8b 81       	ldd	r24, Y+3	; 0x03
+ 1d2:	0e 94 61 00 	call	0xc2	; 0xc2 <changeSeg7DisplayValue>
+	enableSeg7Display(2);
+ 1d6:	82 e0       	ldi	r24, 0x02	; 2
+ 1d8:	0e 94 92 00 	call	0x124	; 0x124 <enableSeg7Display>
+	
+	cleanSeg7Display();
+ 1dc:	0e 94 bb 00 	call	0x176	; 0x176 <cleanSeg7Display>
+	changeSeg7DisplayValue(valueDisp_3);
+ 1e0:	8c 81       	ldd	r24, Y+4	; 0x04
+ 1e2:	0e 94 61 00 	call	0xc2	; 0xc2 <changeSeg7DisplayValue>
+	enableSeg7Display(3);
+ 1e6:	83 e0       	ldi	r24, 0x03	; 3
+ 1e8:	0e 94 92 00 	call	0x124	; 0x124 <enableSeg7Display>
+	
+	return;
+ 1ec:	00 00       	nop
+}
+ 1ee:	0f 90       	pop	r0
+ 1f0:	0f 90       	pop	r0
+ 1f2:	0f 90       	pop	r0
+ 1f4:	0f 90       	pop	r0
+ 1f6:	df 91       	pop	r29
+ 1f8:	cf 91       	pop	r28
+ 1fa:	08 95       	ret
+
+000001fc <main>:
+
+// ========================
+// FUNÇÃO PRINCIPAL
+// ========================
+
+int main(void){
+ 1fc:	ff 92       	push	r15
+ 1fe:	0f 93       	push	r16
+ 200:	1f 93       	push	r17
+ 202:	cf 93       	push	r28
+ 204:	df 93       	push	r29
+ 206:	00 d0       	rcall	.+0      	; 0x208 <main+0xc>
+ 208:	00 d0       	rcall	.+0      	; 0x20a <main+0xe>
+ 20a:	cd b7       	in	r28, 0x3d	; 61
+ 20c:	de b7       	in	r29, 0x3e	; 62
+	uint32_t num = 0;
+ 20e:	19 82       	std	Y+1, r1	; 0x01
+ 210:	1a 82       	std	Y+2, r1	; 0x02
+ 212:	1b 82       	std	Y+3, r1	; 0x03
+ 214:	1c 82       	std	Y+4, r1	; 0x04
+	setupSeg7Display();  // Inicializa os pinos do display de 7 segmentos
+ 216:	0e 94 4b 00 	call	0x96	; 0x96 <setupSeg7Display>
+
+	while(1){
+		
+		// Atualiza o display com os valores atuais
+		runSeg7Display((num/100000)%10, (num/10000)%10, (num/1000)%10, (num/100)%10);
+ 21a:	89 81       	ldd	r24, Y+1	; 0x01
+ 21c:	9a 81       	ldd	r25, Y+2	; 0x02
+ 21e:	ab 81       	ldd	r26, Y+3	; 0x03
+ 220:	bc 81       	ldd	r27, Y+4	; 0x04
+ 222:	24 e6       	ldi	r18, 0x64	; 100
+ 224:	30 e0       	ldi	r19, 0x00	; 0
+ 226:	40 e0       	ldi	r20, 0x00	; 0
+ 228:	50 e0       	ldi	r21, 0x00	; 0
+ 22a:	bc 01       	movw	r22, r24
+ 22c:	cd 01       	movw	r24, r26
+ 22e:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 232:	da 01       	movw	r26, r20
+ 234:	c9 01       	movw	r24, r18
+ 236:	2a e0       	ldi	r18, 0x0A	; 10
+ 238:	30 e0       	ldi	r19, 0x00	; 0
+ 23a:	40 e0       	ldi	r20, 0x00	; 0
+ 23c:	50 e0       	ldi	r21, 0x00	; 0
+ 23e:	bc 01       	movw	r22, r24
+ 240:	cd 01       	movw	r24, r26
+ 242:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 246:	dc 01       	movw	r26, r24
+ 248:	cb 01       	movw	r24, r22
+ 24a:	f8 2e       	mov	r15, r24
+ 24c:	89 81       	ldd	r24, Y+1	; 0x01
+ 24e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 250:	ab 81       	ldd	r26, Y+3	; 0x03
+ 252:	bc 81       	ldd	r27, Y+4	; 0x04
+ 254:	28 ee       	ldi	r18, 0xE8	; 232
+ 256:	33 e0       	ldi	r19, 0x03	; 3
+ 258:	40 e0       	ldi	r20, 0x00	; 0
+ 25a:	50 e0       	ldi	r21, 0x00	; 0
+ 25c:	bc 01       	movw	r22, r24
+ 25e:	cd 01       	movw	r24, r26
+ 260:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 264:	da 01       	movw	r26, r20
+ 266:	c9 01       	movw	r24, r18
+ 268:	2a e0       	ldi	r18, 0x0A	; 10
+ 26a:	30 e0       	ldi	r19, 0x00	; 0
+ 26c:	40 e0       	ldi	r20, 0x00	; 0
+ 26e:	50 e0       	ldi	r21, 0x00	; 0
+ 270:	bc 01       	movw	r22, r24
+ 272:	cd 01       	movw	r24, r26
+ 274:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 278:	dc 01       	movw	r26, r24
+ 27a:	cb 01       	movw	r24, r22
+ 27c:	08 2f       	mov	r16, r24
+ 27e:	89 81       	ldd	r24, Y+1	; 0x01
+ 280:	9a 81       	ldd	r25, Y+2	; 0x02
+ 282:	ab 81       	ldd	r26, Y+3	; 0x03
+ 284:	bc 81       	ldd	r27, Y+4	; 0x04
+ 286:	20 e1       	ldi	r18, 0x10	; 16
+ 288:	37 e2       	ldi	r19, 0x27	; 39
+ 28a:	40 e0       	ldi	r20, 0x00	; 0
+ 28c:	50 e0       	ldi	r21, 0x00	; 0
+ 28e:	bc 01       	movw	r22, r24
+ 290:	cd 01       	movw	r24, r26
+ 292:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 296:	da 01       	movw	r26, r20
+ 298:	c9 01       	movw	r24, r18
+ 29a:	2a e0       	ldi	r18, 0x0A	; 10
+ 29c:	30 e0       	ldi	r19, 0x00	; 0
+ 29e:	40 e0       	ldi	r20, 0x00	; 0
+ 2a0:	50 e0       	ldi	r21, 0x00	; 0
+ 2a2:	bc 01       	movw	r22, r24
+ 2a4:	cd 01       	movw	r24, r26
+ 2a6:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 2aa:	dc 01       	movw	r26, r24
+ 2ac:	cb 01       	movw	r24, r22
+ 2ae:	18 2f       	mov	r17, r24
+ 2b0:	89 81       	ldd	r24, Y+1	; 0x01
+ 2b2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2b4:	ab 81       	ldd	r26, Y+3	; 0x03
+ 2b6:	bc 81       	ldd	r27, Y+4	; 0x04
+ 2b8:	20 ea       	ldi	r18, 0xA0	; 160
+ 2ba:	36 e8       	ldi	r19, 0x86	; 134
+ 2bc:	41 e0       	ldi	r20, 0x01	; 1
+ 2be:	50 e0       	ldi	r21, 0x00	; 0
+ 2c0:	bc 01       	movw	r22, r24
+ 2c2:	cd 01       	movw	r24, r26
+ 2c4:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 2c8:	da 01       	movw	r26, r20
+ 2ca:	c9 01       	movw	r24, r18
+ 2cc:	2a e0       	ldi	r18, 0x0A	; 10
+ 2ce:	30 e0       	ldi	r19, 0x00	; 0
+ 2d0:	40 e0       	ldi	r20, 0x00	; 0
+ 2d2:	50 e0       	ldi	r21, 0x00	; 0
+ 2d4:	bc 01       	movw	r22, r24
+ 2d6:	cd 01       	movw	r24, r26
+ 2d8:	0e 94 81 01 	call	0x302	; 0x302 <__udivmodsi4>
+ 2dc:	dc 01       	movw	r26, r24
+ 2de:	cb 01       	movw	r24, r22
+ 2e0:	2f 2d       	mov	r18, r15
+ 2e2:	40 2f       	mov	r20, r16
+ 2e4:	61 2f       	mov	r22, r17
+ 2e6:	0e 94 cc 00 	call	0x198	; 0x198 <runSeg7Display>
+		
+		num++;
+ 2ea:	89 81       	ldd	r24, Y+1	; 0x01
+ 2ec:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2ee:	ab 81       	ldd	r26, Y+3	; 0x03
+ 2f0:	bc 81       	ldd	r27, Y+4	; 0x04
+ 2f2:	01 96       	adiw	r24, 0x01	; 1
+ 2f4:	a1 1d       	adc	r26, r1
+ 2f6:	b1 1d       	adc	r27, r1
+ 2f8:	89 83       	std	Y+1, r24	; 0x01
+ 2fa:	9a 83       	std	Y+2, r25	; 0x02
+ 2fc:	ab 83       	std	Y+3, r26	; 0x03
+ 2fe:	bc 83       	std	Y+4, r27	; 0x04
+		
+	}
+ 300:	8c cf       	rjmp	.-232    	; 0x21a <main+0x1e>
+
+00000302 <__udivmodsi4>:
+ 302:	a1 e2       	ldi	r26, 0x21	; 33
+ 304:	1a 2e       	mov	r1, r26
+ 306:	aa 1b       	sub	r26, r26
+ 308:	bb 1b       	sub	r27, r27
+ 30a:	fd 01       	movw	r30, r26
+ 30c:	0d c0       	rjmp	.+26     	; 0x328 <__udivmodsi4_ep>
+
+0000030e <__udivmodsi4_loop>:
+ 30e:	aa 1f       	adc	r26, r26
+ 310:	bb 1f       	adc	r27, r27
+ 312:	ee 1f       	adc	r30, r30
+ 314:	ff 1f       	adc	r31, r31
+ 316:	a2 17       	cp	r26, r18
+ 318:	b3 07       	cpc	r27, r19
+ 31a:	e4 07       	cpc	r30, r20
+ 31c:	f5 07       	cpc	r31, r21
+ 31e:	20 f0       	brcs	.+8      	; 0x328 <__udivmodsi4_ep>
+ 320:	a2 1b       	sub	r26, r18
+ 322:	b3 0b       	sbc	r27, r19
+ 324:	e4 0b       	sbc	r30, r20
+ 326:	f5 0b       	sbc	r31, r21
+
+00000328 <__udivmodsi4_ep>:
+ 328:	66 1f       	adc	r22, r22
+ 32a:	77 1f       	adc	r23, r23
+ 32c:	88 1f       	adc	r24, r24
+ 32e:	99 1f       	adc	r25, r25
+ 330:	1a 94       	dec	r1
+ 332:	69 f7       	brne	.-38     	; 0x30e <__udivmodsi4_loop>
+ 334:	60 95       	com	r22
+ 336:	70 95       	com	r23
+ 338:	80 95       	com	r24
+ 33a:	90 95       	com	r25
+ 33c:	9b 01       	movw	r18, r22
+ 33e:	ac 01       	movw	r20, r24
+ 340:	bd 01       	movw	r22, r26
+ 342:	cf 01       	movw	r24, r30
+ 344:	08 95       	ret
+
+00000346 <_exit>:
+ 346:	f8 94       	cli
+
+00000348 <__stop_program>:
+ 348:	ff cf       	rjmp	.-2      	; 0x348 <__stop_program>
