@@ -1,0 +1,14 @@
+//Segmentos//
+RD0 - C6
+RD1 - C5
+RD2 - C4
+RD3 - C3
+RD4 - C2
+RD5 - C1
+RD6 - C0
+
+//Ativação//
+RB7 - B0
+RB6 - B1
+RB5 - B2
+RB4 - B3
