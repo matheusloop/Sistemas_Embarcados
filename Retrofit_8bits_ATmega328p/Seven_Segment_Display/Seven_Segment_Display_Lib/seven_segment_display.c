@@ -14,7 +14,7 @@ static const uint8_t sevenSegmentCode[16] = {
 };
 
 void setupSevenSegmentDisplay(void) {
-	DDRC = 0xFF;   // PORTC como saída (segmentos)
+	DDRD |= 0x7F;   // PORTD como saída (segmentos)
 	DDRB |= 0x0F;  // PB0–PB3 como saída (seleção dos dígitos)
 	
 	return;
@@ -22,7 +22,8 @@ void setupSevenSegmentDisplay(void) {
 
 void showSevenSegmentDisplayValue(uint8_t value, uint8_t displayAddress) {
 	if (value < 16) {
-		PORTC = sevenSegmentCode[value];  // Define o valor a ser mostrado
+		PORTD &= 0x80; //Limpa os 7 últimos bits da porta D
+		PORTD |= sevenSegmentCode[value];  // Define o valor a ser mostrado
 	}
 
 	PORTB &= 0xF0;                         // Limpa PB0–PB3

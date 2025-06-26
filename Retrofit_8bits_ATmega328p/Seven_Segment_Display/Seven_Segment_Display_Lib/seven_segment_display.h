@@ -6,7 +6,7 @@
 /**
  * @brief Configura os pinos necessários para o display de 7 segmentos.
  * 
- * PORTC será usado para os segmentos (a–g), e PB0–PB3 para selecionar os dígitos.
+ * PD0-PD7 será usado para os segmentos (a–g), e PB0–PB3 para selecionar os dígitos.
  */
 void setupSevenSegmentDisplay(void);
 
@@ -19,7 +19,7 @@ void setupSevenSegmentDisplay(void);
 void showSevenSegmentDisplayValue(uint8_t value, uint8_t displayAddress);
 
 /**
- * @brief Limpa a seleção de displays, desligando todos temporariamente.
+ * @brief Limpa a seleção de displays, desligando todos.
  */
 void cleanSevenSegmentDisplay(void);
 

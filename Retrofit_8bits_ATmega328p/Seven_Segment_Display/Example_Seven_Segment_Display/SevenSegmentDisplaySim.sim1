@@ -1,61 +1,61 @@
 <circuit version="1.1.0-SR1" rev="2005" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
 
-<item itemtype="MCU" CircId="mega328-1" mainComp="false" Show_id="true" Show_Val="false" Pos="-196,-84" rotation="0" hflip="1" vflip="1" label="mega328-1" idLabPos="-6.5209,119.341" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="Debug/Example_Seven_Segment_Display.hex" Auto_Load="false" saveEepr="true" Logic_Symbol="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" MainMcu="true" SerialMon="-1" />
+<item itemtype="MCU" CircId="mega328-1" mainComp="false" Show_id="true" Show_Val="false" Pos="-196,-84" rotation="0" hflip="1" vflip="1" label="mega328-1" idLabPos="-8.36738,127.749" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="Debug/Example_Seven_Segment_Display.hex" Auto_Load="false" saveEepr="true" Logic_Symbol="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" MainMcu="true" SerialMon="-1" />
 
-<item itemtype="Seven Segment" CircId="Seven Segment-15" mainComp="false" Show_id="false" Show_Val="false" Pos="-80,-60" rotation="0" hflip="1" vflip="1" label="Seven Segment-15" idLabPos="20,-44" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" NumDisplays="4" Vertical_Pins="false" CommonCathode="true" Threshold="2.4 V" MaxCurrent="20 mA" Resistance="1 Ω" />
+<item itemtype="Seven Segment" CircId="Seven Segment-15" mainComp="false" Show_id="false" Show_Val="false" Pos="-100,-116" rotation="0" hflip="1" vflip="1" label="Seven Segment-15" idLabPos="20,-44" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" NumDisplays="4" Vertical_Pins="false" CommonCathode="true" Threshold="2.4 V" MaxCurrent="20 mA" Resistance="1 Ω" />
 
-<item itemtype="BJT" CircId="BJT-24" mainComp="false" Show_id="false" Show_Val="false" Pos="-80,52" rotation="0" hflip="1" vflip="1" label="BJT-24" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
+<item itemtype="BJT" CircId="BJT-24" mainComp="false" Show_id="false" Show_Val="false" Pos="-100,12" rotation="0" hflip="1" vflip="1" label="BJT-24" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
 
-<item itemtype="BJT" CircId="BJT-25" mainComp="false" Show_id="false" Show_Val="false" Pos="-44,52" rotation="0" hflip="1" vflip="1" label="BJT-25" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
+<item itemtype="BJT" CircId="BJT-25" mainComp="false" Show_id="false" Show_Val="false" Pos="-68,-12" rotation="0" hflip="1" vflip="1" label="BJT-25" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
 
-<item itemtype="BJT" CircId="BJT-26" mainComp="false" Show_id="false" Show_Val="false" Pos="-8,52" rotation="0" hflip="1" vflip="1" label="BJT-26" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
+<item itemtype="BJT" CircId="BJT-26" mainComp="false" Show_id="false" Show_Val="false" Pos="-36,-36" rotation="0" hflip="1" vflip="1" label="BJT-26" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
 
-<item itemtype="BJT" CircId="BJT-27" mainComp="false" Show_id="false" Show_Val="false" Pos="28,52" rotation="0" hflip="1" vflip="1" label="BJT-27" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
+<item itemtype="BJT" CircId="BJT-27" mainComp="false" Show_id="false" Show_Val="false" Pos="-4,-60" rotation="0" hflip="1" vflip="1" label="BJT-27" idLabPos="18,0" labelrot="0" valLabPos="-16,20" valLabRot="0" PNP="false" Gain="100" Vcrit="0.670736 V" />
 
-<item itemtype="Ground" CircId="Ground-35" mainComp="false" Show_id="false" Show_Val="false" Pos="-72,136" rotation="0" hflip="1" vflip="1" label="Ground-35" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-35" mainComp="false" Show_id="false" Show_Val="false" Pos="-92,48" rotation="0" hflip="1" vflip="1" label="Ground-35" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
-<item itemtype="Ground" CircId="Ground-36" mainComp="false" Show_id="false" Show_Val="false" Pos="-36,136" rotation="0" hflip="1" vflip="1" label="Ground-36" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-36" mainComp="false" Show_id="false" Show_Val="false" Pos="-60,48" rotation="0" hflip="1" vflip="1" label="Ground-36" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
-<item itemtype="Ground" CircId="Ground-37" mainComp="false" Show_id="false" Show_Val="false" Pos="0,136" rotation="0" hflip="1" vflip="1" label="Ground-37" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-37" mainComp="false" Show_id="false" Show_Val="false" Pos="-28,48" rotation="0" hflip="1" vflip="1" label="Ground-37" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
-<item itemtype="Ground" CircId="Ground-38" mainComp="false" Show_id="false" Show_Val="false" Pos="36,136" rotation="0" hflip="1" vflip="1" label="Ground-38" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-38" mainComp="false" Show_id="false" Show_Val="false" Pos="4,48" rotation="0" hflip="1" vflip="1" label="Ground-38" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
-<item itemtype="Connector" uid="Connector-48" startpinid="BJT-24-collector" endpinid="Seven Segment-15-pin_commona" pointList="-72,36,-72,-28" />
+<item itemtype="Connector" uid="Connector-95" startpinid="BJT-24-emiter" endpinid="Ground-35-Gnd" pointList="-92,28,-92,32" />
 
-<item itemtype="Connector" uid="Connector-86" startpinid="Seven Segment-15-pin_commonb" endpinid="BJT-25-collector" pointList="-40,-28,-40,-12,-36,-12,-36,36" />
+<item itemtype="Connector" uid="Connector-96" startpinid="BJT-25-emiter" endpinid="Ground-36-Gnd" pointList="-60,4,-60,32" />
 
-<item itemtype="Connector" uid="Connector-87" startpinid="Seven Segment-15-pin_commonc" endpinid="BJT-26-collector" pointList="-8,-28,-8,-12,0,-12,0,36" />
+<item itemtype="Connector" uid="Connector-98" startpinid="BJT-26-emiter" endpinid="Ground-37-Gnd" pointList="-28,-20,-28,32" />
 
-<item itemtype="Connector" uid="Connector-88" startpinid="Seven Segment-15-pin_commond" endpinid="BJT-27-collector" pointList="24,-28,24,-12,36,-12,36,36" />
+<item itemtype="Connector" uid="Connector-99" startpinid="BJT-27-emiter" endpinid="Ground-38-Gnd" pointList="4,-44,4,32" />
 
-<item itemtype="Connector" uid="Connector-90" startpinid="BJT-27-base" endpinid="mega328-1-PORTB3" pointList="12,52,12,84,-116,84,-116,12,-156,12" />
+<item itemtype="Connector" uid="Connector-137" startpinid="mega328-1-PORTD0" endpinid="Seven Segment-15-pin_g" pointList="-204,-68,-212,-68,-212,-92,-124,-92" />
 
-<item itemtype="Connector" uid="Connector-91" startpinid="mega328-1-PORTB2" endpinid="BJT-26-base" pointList="-156,20,-124,20,-124,92,-24,92,-24,52" />
+<item itemtype="Connector" uid="Connector-138" startpinid="mega328-1-PORTD1" endpinid="Seven Segment-15-pin_f" pointList="-204,-60,-216,-60,-216,-100,-124,-100" />
 
-<item itemtype="Connector" uid="Connector-92" startpinid="mega328-1-PORTB1" endpinid="BJT-25-base" pointList="-156,28,-132,28,-132,100,-60,100,-60,52" />
+<item itemtype="Connector" uid="Connector-139" startpinid="mega328-1-PORTD2" endpinid="Seven Segment-15-pin_e" pointList="-204,-52,-220,-52,-220,-108,-124,-108" />
 
-<item itemtype="Connector" uid="Connector-93" startpinid="BJT-24-base" endpinid="mega328-1-PORTB0" pointList="-96,52,-96,108,-220,108,-220,28,-204,28" />
+<item itemtype="Connector" uid="Connector-140" startpinid="mega328-1-PORTD3" endpinid="Seven Segment-15-pin_d" pointList="-204,-44,-224,-44,-224,-116,-124,-116" />
 
-<item itemtype="Connector" uid="Connector-95" startpinid="BJT-24-emiter" endpinid="Ground-35-Gnd" pointList="-72,68,-72,120" />
+<item itemtype="Connector" uid="Connector-141" startpinid="mega328-1-PORTD4" endpinid="Seven Segment-15-pin_c" pointList="-204,-36,-228,-36,-228,-124,-124,-124" />
 
-<item itemtype="Connector" uid="Connector-96" startpinid="BJT-25-emiter" endpinid="Ground-36-Gnd" pointList="-36,68,-36,120" />
+<item itemtype="Connector" uid="Connector-142" startpinid="mega328-1-PORTD5" endpinid="Seven Segment-15-pin_b" pointList="-204,4,-232,4,-232,-132,-124,-132" />
 
-<item itemtype="Connector" uid="Connector-98" startpinid="BJT-26-emiter" endpinid="Ground-37-Gnd" pointList="0,68,0,120" />
+<item itemtype="Connector" uid="Connector-143" startpinid="mega328-1-PORTD6" endpinid="Seven Segment-15-pin_a" pointList="-204,12,-236,12,-236,-140,-124,-140" />
 
-<item itemtype="Connector" uid="Connector-99" startpinid="BJT-27-emiter" endpinid="Ground-38-Gnd" pointList="36,68,36,120" />
+<item itemtype="Connector" uid="Connector-149" startpinid="BJT-24-collector" endpinid="Seven Segment-15-pin_commona" pointList="-92,-4,-92,-84" />
 
-<item itemtype="Connector" uid="Connector-125" startpinid="mega328-1-PORTC6" endpinid="Seven Segment-15-pin_a" pointList="-204,-76,-204,-92,-108,-92,-108,-84,-104,-84" />
+<item itemtype="Connector" uid="Connector-150" startpinid="BJT-25-collector" endpinid="Seven Segment-15-pin_commonb" pointList="-60,-28,-60,-84" />
 
-<item itemtype="Connector" uid="Connector-126" startpinid="mega328-1-PORTC5" endpinid="Seven Segment-15-pin_b" pointList="-156,-76,-104,-76" />
+<item itemtype="Connector" uid="Connector-151" startpinid="Seven Segment-15-pin_commonc" endpinid="BJT-26-collector" pointList="-28,-84,-28,-52" />
 
-<item itemtype="Connector" uid="Connector-127" startpinid="mega328-1-PORTC4" endpinid="Seven Segment-15-pin_c" pointList="-156,-68,-104,-68" />
+<item itemtype="Connector" uid="Connector-152" startpinid="Seven Segment-15-pin_commond" endpinid="BJT-27-collector" pointList="4,-84,4,-76" />
 
-<item itemtype="Connector" uid="Connector-128" startpinid="mega328-1-PORTC3" endpinid="Seven Segment-15-pin_d" pointList="-156,-60,-104,-60" />
+<item itemtype="Connector" uid="Connector-155" startpinid="mega328-1-PORTB3" endpinid="BJT-27-base" pointList="-156,12,-148,12,-148,-60,-20,-60" />
 
-<item itemtype="Connector" uid="Connector-129" startpinid="mega328-1-PORTC2" endpinid="Seven Segment-15-pin_e" pointList="-156,-52,-104,-52" />
+<item itemtype="Connector" uid="Connector-156" startpinid="mega328-1-PORTB2" endpinid="BJT-26-base" pointList="-156,20,-144,20,-144,-36,-52,-36" />
 
-<item itemtype="Connector" uid="Connector-130" startpinid="mega328-1-PORTC1" endpinid="Seven Segment-15-pin_f" pointList="-156,-44,-104,-44" />
+<item itemtype="Connector" uid="Connector-157" startpinid="mega328-1-PORTB1" endpinid="BJT-25-base" pointList="-156,28,-140,28,-140,-12,-84,-12" />
 
-<item itemtype="Connector" uid="Connector-131" startpinid="mega328-1-PORTC0" endpinid="Seven Segment-15-pin_g" pointList="-156,-36,-104,-36" />
+<item itemtype="Connector" uid="Connector-158" startpinid="mega328-1-PORTB0" endpinid="BJT-24-base" pointList="-204,28,-212,28,-212,44,-136,44,-136,12,-116,12" />
 
 </circuit>
