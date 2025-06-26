@@ -1,11 +1,11 @@
 //Segmentos//
-RD0 - PC6
-RD1 - PC5
-RD2 - PC4
-RD3 - PC3
-RD4 - PC2
-RD5 - PC1
-RD6 - PC0
+RD0 - PD6
+RD1 - PD5
+RD2 - PD4
+RD3 - PD3
+RD4 - PD2
+RD5 - PD1
+RD6 - PD0
 
 //Ativação//
 RB7 - PB0
