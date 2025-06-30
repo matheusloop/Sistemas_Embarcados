@@ -128,6 +128,14 @@
       <SubType>compile</SubType>
       <Link>seven_segment_display.h</Link>
     </Compile>
+    <Compile Include="..\Buttons_Lib\buttons.c">
+      <SubType>compile</SubType>
+      <Link>buttons.c</Link>
+    </Compile>
+    <Compile Include="..\Buttons_Lib\buttons.h">
+      <SubType>compile</SubType>
+      <Link>buttons.h</Link>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

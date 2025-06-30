@@ -5,7 +5,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
                               seven_segment_display.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              main.o (__do_clear_bss)
+                              buttons.o (__do_clear_bss)
 
 Discarded input sections
 
@@ -14,6 +14,9 @@ Discarded input sections
  .text          0x00000000        0x0 seven_segment_display.o
  .data          0x00000000        0x0 seven_segment_display.o
  .bss           0x00000000        0x0 seven_segment_display.o
+ .text          0x00000000        0x0 buttons.o
+ .data          0x00000000        0x0 buttons.o
+ .bss           0x00000000        0x0 buttons.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -83,6 +86,7 @@ Linker script and memory map
 Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
 LOAD seven_segment_display.o
+LOAD buttons.o
 LOAD main.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
@@ -193,7 +197,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x342
+.text           0x00000000      0x2dc
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -291,30 +295,24 @@ END GROUP
  .text.showAllSevenSegmentDisplay
                 0x000000f4       0x7a seven_segment_display.o
                 0x000000f4                showAllSevenSegmentDisplay
- .text.addNumU  0x0000016e       0x26 main.o
-                0x0000016e                addNumU
- .text.addNumD  0x00000194       0x26 main.o
-                0x00000194                addNumD
- .text.addNumC  0x000001ba       0x26 main.o
-                0x000001ba                addNumC
- .text.addNumM  0x000001e0       0x26 main.o
-                0x000001e0                addNumM
- .text.register_button_callback
-                0x00000206       0x1c main.o
-                0x00000206                register_button_callback
- .text.__vector_3
-                0x00000222       0xb2 main.o
-                0x00000222                __vector_3
  .text.setupButtons
-                0x000002d4       0x24 main.o
-                0x000002d4                setupButtons
- .text.main     0x000002f8       0x46 main.o
-                0x000002f8                main
-                0x0000033e                . = ALIGN (0x2)
+                0x0000016e       0x24 buttons.o
+                0x0000016e                setupButtons
+ .text.register_button_callback
+                0x00000192       0x24 buttons.o
+                0x00000192                register_button_callback
+ .text.__vector_3
+                0x000001b6       0x94 buttons.o
+                0x000001b6                __vector_3
+ .text.addNum   0x0000024a       0x24 main.o
+                0x0000024a                addNum
+ .text.main     0x0000026e       0x6a main.o
+                0x0000026e                main
+                0x000002d8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000033e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000033e                _exit
-                0x0000033e                exit
+ .fini9         0x000002d8        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000002d8                _exit
+                0x000002d8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -333,11 +331,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000033e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000002d8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000342                _etext = .
+                0x000002dc                _etext = .
 
-.data           0x00800100       0x10 load address 0x00000342
+.data           0x00800100       0x10 load address 0x000002dc
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -351,30 +349,22 @@ END GROUP
                 0x00800110                _edata = .
                 0x00800110                PROVIDE (__data_end, .)
 
-.bss            0x00800110        0xc
+.bss            0x00800110       0x10
                 0x00800110                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.button_callbacks
-                0x00800110        0x8 main.o
- .bss.numM      0x00800118        0x1 main.o
-                0x00800118                numM
- .bss.numC      0x00800119        0x1 main.o
-                0x00800119                numC
- .bss.numD      0x0080011a        0x1 main.o
-                0x0080011a                numD
- .bss.numU      0x0080011b        0x1 main.o
-                0x0080011b                numU
+ .bss.button_handlers
+                0x00800110       0x10 buttons.o
  *(COMMON)
-                0x0080011c                PROVIDE (__bss_end, .)
-                0x00000342                __data_load_start = LOADADDR (.data)
-                0x00000352                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800120                PROVIDE (__bss_end, .)
+                0x000002dc                __data_load_start = LOADADDR (.data)
+                0x000002ec                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080011c        0x0
+.noinit         0x00800120        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080011c                _end = .
+                0x00800120                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -418,6 +408,7 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 seven_segment_display.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 buttons.o
  .comment       0x00000030       0x31 main.o
 
 .note.gnu.avr.deviceinfo
@@ -445,46 +436,55 @@ END GROUP
  .debug_aranges
                 0x00000000       0x38 seven_segment_display.o
  .debug_aranges
-                0x00000038       0x58 main.o
+                0x00000038       0x30 buttons.o
+ .debug_aranges
+                0x00000068       0x28 main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xbc1
+.debug_info     0x00000000      0xcf9
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x30c seven_segment_display.o
- .debug_info    0x00000900      0x2c1 main.o
+ .debug_info    0x00000900      0x1c9 buttons.o
+ .debug_info    0x00000ac9      0x230 main.o
 
-.debug_abbrev   0x00000000      0x84c
+.debug_abbrev   0x00000000      0x956
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x162 seven_segment_display.o
- .debug_abbrev  0x00000704      0x148 main.o
+ .debug_abbrev  0x00000704      0x155 buttons.o
+ .debug_abbrev  0x00000859       0xfd main.o
 
-.debug_line     0x00000000      0x579
+.debug_line     0x00000000      0x5de
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x20c seven_segment_display.o
- .debug_line    0x00000340      0x239 main.o
+ .debug_line    0x00000340      0x142 buttons.o
+ .debug_line    0x00000482      0x15c main.o
 
-.debug_frame    0x00000000      0x144
+.debug_frame    0x00000000      0x13c
  *(.debug_frame)
  .debug_frame   0x00000000       0x68 seven_segment_display.o
- .debug_frame   0x00000068       0xdc main.o
+ .debug_frame   0x00000068       0x90 buttons.o
+ .debug_frame   0x000000f8       0x44 main.o
 
-.debug_str      0x00000000      0x58f
+.debug_str      0x00000000      0x5a2
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x2b9 seven_segment_display.o
                                 0x2ed (size before relaxing)
- .debug_str     0x000004c1       0xce main.o
-                                0x29c (size before relaxing)
+ .debug_str     0x000004c1       0xb5 buttons.o
+                                0x24f (size before relaxing)
+ .debug_str     0x00000576       0x2c main.o
+                                0x232 (size before relaxing)
 
-.debug_loc      0x00000000      0x2fd
+.debug_loc      0x00000000      0x371
  *(.debug_loc)
  .debug_loc     0x00000000      0x232 seven_segment_display.o
- .debug_loc     0x00000232       0xcb main.o
+ .debug_loc     0x00000232       0xf7 buttons.o
+ .debug_loc     0x00000329       0x48 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -504,10 +504,11 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x70
+.debug_ranges   0x00000000       0x60
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x28 seven_segment_display.o
- .debug_ranges  0x00000028       0x48 main.o
+ .debug_ranges  0x00000028       0x20 buttons.o
+ .debug_ranges  0x00000048       0x18 main.o
 
 .debug_macro
  *(.debug_macro)
