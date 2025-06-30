@@ -18,10 +18,10 @@
  * @brief Enumeração para os pinos dos botões.
  */
 typedef enum {
-    BUTTON_A = 4,  ///< Botão conectado ao pino PB4
-    BUTTON_B = 5,  ///< Botão conectado ao pino PB5
-    BUTTON_C = 6,  ///< Botão conectado ao pino PB6
-    BUTTON_D = 7   ///< Botão conectado ao pino PB7
+    BUTTON_A = 0,  ///< Botão conectado ao pino PC0
+    BUTTON_B = 1,  ///< Botão conectado ao pino PC1
+    BUTTON_C = 2,  ///< Botão conectado ao pino PC2
+    BUTTON_D = 3   ///< Botão conectado ao pino PC3
 } ButtonPin;
 
 /**
@@ -32,7 +32,7 @@ typedef enum {
 typedef void (*button_callback_t)(void* arg);
 
 /**
- * @brief Configura os botões (PB4–PB7) com resistores pull-up e ativa interrupções.
+ * @brief Configura os botões (PC0–PC3) com resistores pull-up e ativa interrupções.
  */
 void setupButtons(void);
 

@@ -1,0 +1,5 @@
+//Botões
+RB0 - PC0 - BUTTON_A
+RB1 - PC1 - BUTTON_B
+RB2 - PC2 - BUTTON_C
+RB3 - PC3 - BUTTON_D
