@@ -1,0 +1,438 @@
+
+Exemple_Heating_Cooling_System.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000031c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000002a8  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800100  00800100  0000031c  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000031c  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000034c  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000c8  00000000  00000000  0000038c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000cd5  00000000  00000000  00000454  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000009dd  00000000  00000000  00001129  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000007aa  00000000  00000000  00001b06  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000158  00000000  00000000  000022b0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000005dc  00000000  00000000  00002408  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000241  00000000  00000000  000029e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000088  00000000  00000000  00002c25  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_21>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a2 30       	cpi	r26, 0x02	; 2
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 f5 00 	call	0x1ea	; 0x1ea <main>
+  88:	0c 94 52 01 	jmp	0x2a4	; 0x2a4 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <__vector_21>:
+	sei(); // Habilita interrupções globais
+}
+
+uint16_t readTemperatureSensorLevel(void){
+	return TemperatureSensorLevel;
+}
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	8f 93       	push	r24
+  9c:	9f 93       	push	r25
+  9e:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+  a2:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+  a6:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+  aa:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+  ae:	9f 91       	pop	r25
+  b0:	8f 91       	pop	r24
+  b2:	0f 90       	pop	r0
+  b4:	0f be       	out	0x3f, r0	; 63
+  b6:	0f 90       	pop	r0
+  b8:	1f 90       	pop	r1
+  ba:	18 95       	reti
+
+000000bc <setupTemperatureSensor>:
+  bc:	87 b1       	in	r24, 0x07	; 7
+  be:	8f 7d       	andi	r24, 0xDF	; 223
+  c0:	87 b9       	out	0x07, r24	; 7
+  c2:	88 b1       	in	r24, 0x08	; 8
+  c4:	8f 7d       	andi	r24, 0xDF	; 223
+  c6:	88 b9       	out	0x08, r24	; 8
+  c8:	85 e4       	ldi	r24, 0x45	; 69
+  ca:	80 93 7c 00 	sts	0x007C, r24	; 0x80007c <__TEXT_REGION_LENGTH__+0x7f807c>
+  ce:	8f ee       	ldi	r24, 0xEF	; 239
+  d0:	80 93 7a 00 	sts	0x007A, r24	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+  d4:	10 92 7b 00 	sts	0x007B, r1	; 0x80007b <__TEXT_REGION_LENGTH__+0x7f807b>
+  d8:	ee e7       	ldi	r30, 0x7E	; 126
+  da:	f0 e0       	ldi	r31, 0x00	; 0
+  dc:	80 81       	ld	r24, Z
+  de:	80 62       	ori	r24, 0x20	; 32
+  e0:	80 83       	st	Z, r24
+  e2:	78 94       	sei
+  e4:	08 95       	ret
+
+000000e6 <readTemperatureDegrees>:
+
+uint16_t readTemperatureDegrees(void){
+	return  (TemperatureSensorLevel-120)/8; // Converte o nível ADC em graus Celsius (ajuste empírico)
+  e6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  ea:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+  ee:	88 57       	subi	r24, 0x78	; 120
+  f0:	91 09       	sbc	r25, r1
+}
+  f2:	96 95       	lsr	r25
+  f4:	87 95       	ror	r24
+  f6:	96 95       	lsr	r25
+  f8:	87 95       	ror	r24
+  fa:	96 95       	lsr	r25
+  fc:	87 95       	ror	r24
+  fe:	08 95       	ret
+
+00000100 <setupUART>:
+
+// Recebe um byte pela UART (bloqueante)
+uint8_t receiveUART(void) {
+	while (!(UCSR0A & (1 << RXC0))); // Aguarda dado recebido
+	return UDR0;
+}
+ 100:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+ 104:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+ 108:	88 e1       	ldi	r24, 0x18	; 24
+ 10a:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7f80c1>
+ 10e:	8e e0       	ldi	r24, 0x0E	; 14
+ 110:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+ 114:	08 95       	ret
+
+00000116 <transmitUART_8bits>:
+ 116:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 11a:	95 ff       	sbrs	r25, 5
+ 11c:	fc cf       	rjmp	.-8      	; 0x116 <transmitUART_8bits>
+ 11e:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 122:	08 95       	ret
+
+00000124 <sendASCIIFromInt>:
+
+// Envia número inteiro como string ASCII pela UART
+void sendASCIIFromInt(uint16_t num) {
+ 124:	0f 93       	push	r16
+ 126:	1f 93       	push	r17
+ 128:	cf 93       	push	r28
+ 12a:	df 93       	push	r29
+ 12c:	00 d0       	rcall	.+0      	; 0x12e <sendASCIIFromInt+0xa>
+ 12e:	00 d0       	rcall	.+0      	; 0x130 <sendASCIIFromInt+0xc>
+ 130:	00 d0       	rcall	.+0      	; 0x132 <sendASCIIFromInt+0xe>
+ 132:	cd b7       	in	r28, 0x3d	; 61
+ 134:	de b7       	in	r29, 0x3e	; 62
+    } else if (__radix < 2 || __radix > 36) {
+	*__s = 0;
+	return __s;
+    } else {
+	extern char *__itoa_ncheck (int, char *, unsigned char);
+	return __itoa_ncheck (__val, __s, __radix);
+ 136:	4a e0       	ldi	r20, 0x0A	; 10
+ 138:	be 01       	movw	r22, r28
+ 13a:	6f 5f       	subi	r22, 0xFF	; 255
+ 13c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 13e:	0e 94 1d 01 	call	0x23a	; 0x23a <__itoa_ncheck>
+	char buffer[6];
+	itoa(num, buffer, 10);
+	for (char *p = buffer; *p; p++) {
+ 142:	8e 01       	movw	r16, r28
+ 144:	0f 5f       	subi	r16, 0xFF	; 255
+ 146:	1f 4f       	sbci	r17, 0xFF	; 255
+ 148:	0a c0       	rjmp	.+20     	; 0x15e <sendASCIIFromInt+0x3a>
+		transmitUART_8bits(*p);
+ 14a:	0e 94 8b 00 	call	0x116	; 0x116 <transmitUART_8bits>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 14e:	83 ef       	ldi	r24, 0xF3	; 243
+ 150:	91 e0       	ldi	r25, 0x01	; 1
+ 152:	01 97       	sbiw	r24, 0x01	; 1
+ 154:	f1 f7       	brne	.-4      	; 0x152 <sendASCIIFromInt+0x2e>
+ 156:	00 c0       	rjmp	.+0      	; 0x158 <sendASCIIFromInt+0x34>
+ 158:	00 00       	nop
+
+// Envia número inteiro como string ASCII pela UART
+void sendASCIIFromInt(uint16_t num) {
+	char buffer[6];
+	itoa(num, buffer, 10);
+	for (char *p = buffer; *p; p++) {
+ 15a:	0f 5f       	subi	r16, 0xFF	; 255
+ 15c:	1f 4f       	sbci	r17, 0xFF	; 255
+ 15e:	f8 01       	movw	r30, r16
+ 160:	80 81       	ld	r24, Z
+ 162:	81 11       	cpse	r24, r1
+ 164:	f2 cf       	rjmp	.-28     	; 0x14a <sendASCIIFromInt+0x26>
+		transmitUART_8bits(*p);
+		_delay_ms(2);
+	}
+	transmitUART_8bits('\n');
+ 166:	8a e0       	ldi	r24, 0x0A	; 10
+ 168:	0e 94 8b 00 	call	0x116	; 0x116 <transmitUART_8bits>
+}
+ 16c:	26 96       	adiw	r28, 0x06	; 6
+ 16e:	0f b6       	in	r0, 0x3f	; 63
+ 170:	f8 94       	cli
+ 172:	de bf       	out	0x3e, r29	; 62
+ 174:	0f be       	out	0x3f, r0	; 63
+ 176:	cd bf       	out	0x3d, r28	; 61
+ 178:	df 91       	pop	r29
+ 17a:	cf 91       	pop	r28
+ 17c:	1f 91       	pop	r17
+ 17e:	0f 91       	pop	r16
+ 180:	08 95       	ret
+
+00000182 <setupHeatingCoolingSystem>:
+#include <avr/io.h>
+
+void setupHeatingCoolingSystem(void){
+   
+    DDRB |= ((1 << 1) | (1 << 2));  // Configura os pinos PB1 (OC1A) e PB2 (OC1B) como saída
+ 182:	84 b1       	in	r24, 0x04	; 4
+ 184:	86 60       	ori	r24, 0x06	; 6
+ 186:	84 b9       	out	0x04, r24	; 4
+
+    // Configura Timer1 para modo PWM rápido
+    // COM1A1:0 = 10 (não-invertido para OC1A)
+    // COM1B1:0 = 10 (não-invertido para OC1B)
+    // WGM11:0 = 11 (modo 14 - Fast PWM com 0xFF como TOP)
+    TCCR1A = 0b10100011;
+ 188:	83 ea       	ldi	r24, 0xA3	; 163
+ 18a:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+
+    // WGM13:2 = 10 (com os bits anteriores, forma modo 14)
+    // CS10 = 1 (sem prescaler, clk/1)
+    TCCR1B = 0b00000001;
+ 18e:	81 e0       	ldi	r24, 0x01	; 1
+ 190:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+
+    // Duty cycle inicial de 0% para ambos os canais
+    OCR1A = 0; // Aquecedor
+ 194:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 198:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+    OCR1B = 0; // Resfriador
+ 19c:	10 92 8b 00 	sts	0x008B, r1	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ 1a0:	10 92 8a 00 	sts	0x008A, r1	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+ 1a4:	08 95       	ret
+
+000001a6 <setHeaterDutyCycle>:
+}
+
+void setHeaterDutyCycle(uint8_t heaterDutyCycle){
+    // Ajusta OCR1A proporcionalmente ao valor percentual
+    OCR1A = (1023 / 100) * heaterDutyCycle;
+ 1a6:	90 e0       	ldi	r25, 0x00	; 0
+ 1a8:	9c 01       	movw	r18, r24
+ 1aa:	22 0f       	add	r18, r18
+ 1ac:	33 1f       	adc	r19, r19
+ 1ae:	88 0f       	add	r24, r24
+ 1b0:	99 1f       	adc	r25, r25
+ 1b2:	88 0f       	add	r24, r24
+ 1b4:	99 1f       	adc	r25, r25
+ 1b6:	88 0f       	add	r24, r24
+ 1b8:	99 1f       	adc	r25, r25
+ 1ba:	82 0f       	add	r24, r18
+ 1bc:	93 1f       	adc	r25, r19
+ 1be:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 1c2:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+ 1c6:	08 95       	ret
+
+000001c8 <setCoolerDutyCycle>:
+}
+
+void setCoolerDutyCycle(uint8_t coolerDutyCycle){
+    // Ajusta OCR1B proporcionalmente ao valor percentual
+    OCR1B = (1023 / 100) * coolerDutyCycle;
+ 1c8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ca:	9c 01       	movw	r18, r24
+ 1cc:	22 0f       	add	r18, r18
+ 1ce:	33 1f       	adc	r19, r19
+ 1d0:	88 0f       	add	r24, r24
+ 1d2:	99 1f       	adc	r25, r25
+ 1d4:	88 0f       	add	r24, r24
+ 1d6:	99 1f       	adc	r25, r25
+ 1d8:	88 0f       	add	r24, r24
+ 1da:	99 1f       	adc	r25, r25
+ 1dc:	82 0f       	add	r24, r18
+ 1de:	93 1f       	adc	r25, r19
+ 1e0:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ 1e4:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+ 1e8:	08 95       	ret
+
+000001ea <main>:
+
+int main(void){
+	//uint8_t dt = 0, flag = 1;
+	uint8_t temp;
+	
+	setupHeatingCoolingSystem();
+ 1ea:	0e 94 c1 00 	call	0x182	; 0x182 <setupHeatingCoolingSystem>
+	setupTemperatureSensor();
+ 1ee:	0e 94 5e 00 	call	0xbc	; 0xbc <setupTemperatureSensor>
+	setupUART(MYUBRR);
+ 1f2:	87 e6       	ldi	r24, 0x67	; 103
+ 1f4:	90 e0       	ldi	r25, 0x00	; 0
+ 1f6:	0e 94 80 00 	call	0x100	; 0x100 <setupUART>
+	
+	while (1) {
+		temp = readTemperatureDegrees();
+ 1fa:	0e 94 73 00 	call	0xe6	; 0xe6 <readTemperatureDegrees>
+ 1fe:	c8 2f       	mov	r28, r24
+		sendASCIIFromInt(temp);
+ 200:	99 27       	eor	r25, r25
+ 202:	0e 94 92 00 	call	0x124	; 0x124 <sendASCIIFromInt>
+		if(temp >= 70) {setHeaterDutyCycle(0); setCoolerDutyCycle(50);}
+ 206:	c6 34       	cpi	r28, 0x46	; 70
+ 208:	30 f0       	brcs	.+12     	; 0x216 <main+0x2c>
+ 20a:	80 e0       	ldi	r24, 0x00	; 0
+ 20c:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <setHeaterDutyCycle>
+ 210:	82 e3       	ldi	r24, 0x32	; 50
+ 212:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <setCoolerDutyCycle>
+		if(temp <= 40) {setCoolerDutyCycle(0); setHeaterDutyCycle(50);}
+ 216:	c9 32       	cpi	r28, 0x29	; 41
+ 218:	30 f4       	brcc	.+12     	; 0x226 <main+0x3c>
+ 21a:	80 e0       	ldi	r24, 0x00	; 0
+ 21c:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <setCoolerDutyCycle>
+ 220:	82 e3       	ldi	r24, 0x32	; 50
+ 222:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <setHeaterDutyCycle>
+ 226:	2f ef       	ldi	r18, 0xFF	; 255
+ 228:	89 e6       	ldi	r24, 0x69	; 105
+ 22a:	98 e1       	ldi	r25, 0x18	; 24
+ 22c:	21 50       	subi	r18, 0x01	; 1
+ 22e:	80 40       	sbci	r24, 0x00	; 0
+ 230:	90 40       	sbci	r25, 0x00	; 0
+ 232:	e1 f7       	brne	.-8      	; 0x22c <main+0x42>
+ 234:	00 c0       	rjmp	.+0      	; 0x236 <main+0x4c>
+ 236:	00 00       	nop
+ 238:	e0 cf       	rjmp	.-64     	; 0x1fa <main+0x10>
+
+0000023a <__itoa_ncheck>:
+ 23a:	bb 27       	eor	r27, r27
+ 23c:	4a 30       	cpi	r20, 0x0A	; 10
+ 23e:	31 f4       	brne	.+12     	; 0x24c <__itoa_ncheck+0x12>
+ 240:	99 23       	and	r25, r25
+ 242:	22 f4       	brpl	.+8      	; 0x24c <__itoa_ncheck+0x12>
+ 244:	bd e2       	ldi	r27, 0x2D	; 45
+ 246:	90 95       	com	r25
+ 248:	81 95       	neg	r24
+ 24a:	9f 4f       	sbci	r25, 0xFF	; 255
+ 24c:	0c 94 29 01 	jmp	0x252	; 0x252 <__utoa_common>
+
+00000250 <__utoa_ncheck>:
+ 250:	bb 27       	eor	r27, r27
+
+00000252 <__utoa_common>:
+ 252:	fb 01       	movw	r30, r22
+ 254:	55 27       	eor	r21, r21
+ 256:	aa 27       	eor	r26, r26
+ 258:	88 0f       	add	r24, r24
+ 25a:	99 1f       	adc	r25, r25
+ 25c:	aa 1f       	adc	r26, r26
+ 25e:	a4 17       	cp	r26, r20
+ 260:	10 f0       	brcs	.+4      	; 0x266 <__utoa_common+0x14>
+ 262:	a4 1b       	sub	r26, r20
+ 264:	83 95       	inc	r24
+ 266:	50 51       	subi	r21, 0x10	; 16
+ 268:	b9 f7       	brne	.-18     	; 0x258 <__utoa_common+0x6>
+ 26a:	a0 5d       	subi	r26, 0xD0	; 208
+ 26c:	aa 33       	cpi	r26, 0x3A	; 58
+ 26e:	08 f0       	brcs	.+2      	; 0x272 <__utoa_common+0x20>
+ 270:	a9 5d       	subi	r26, 0xD9	; 217
+ 272:	a1 93       	st	Z+, r26
+ 274:	00 97       	sbiw	r24, 0x00	; 0
+ 276:	79 f7       	brne	.-34     	; 0x256 <__utoa_common+0x4>
+ 278:	b1 11       	cpse	r27, r1
+ 27a:	b1 93       	st	Z+, r27
+ 27c:	11 92       	st	Z+, r1
+ 27e:	cb 01       	movw	r24, r22
+ 280:	0c 94 42 01 	jmp	0x284	; 0x284 <strrev>
+
+00000284 <strrev>:
+ 284:	dc 01       	movw	r26, r24
+ 286:	fc 01       	movw	r30, r24
+ 288:	67 2f       	mov	r22, r23
+ 28a:	71 91       	ld	r23, Z+
+ 28c:	77 23       	and	r23, r23
+ 28e:	e1 f7       	brne	.-8      	; 0x288 <strrev+0x4>
+ 290:	32 97       	sbiw	r30, 0x02	; 2
+ 292:	04 c0       	rjmp	.+8      	; 0x29c <strrev+0x18>
+ 294:	7c 91       	ld	r23, X
+ 296:	6d 93       	st	X+, r22
+ 298:	70 83       	st	Z, r23
+ 29a:	62 91       	ld	r22, -Z
+ 29c:	ae 17       	cp	r26, r30
+ 29e:	bf 07       	cpc	r27, r31
+ 2a0:	c8 f3       	brcs	.-14     	; 0x294 <strrev+0x10>
+ 2a2:	08 95       	ret
+
+000002a4 <_exit>:
+ 2a4:	f8 94       	cli
+
+000002a6 <__stop_program>:
+ 2a6:	ff cf       	rjmp	.-2      	; 0x2a6 <__stop_program>

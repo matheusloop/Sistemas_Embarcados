@@ -1,0 +1,5 @@
+//Resfriador
+RC2 - PB2
+
+//Aquecedor
+RC3 - PB1
