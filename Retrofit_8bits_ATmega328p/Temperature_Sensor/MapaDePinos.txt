@@ -1,0 +1,2 @@
+//Sensor de Temperatura
+RA0 - PC5

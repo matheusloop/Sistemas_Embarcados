@@ -14,7 +14,8 @@ void setupTemperatureSensor(void){
 	ADMUX = 0b01000101; // Usa VCC como referência (AVCC), seleciona canal ADC5 (PC5)
 	ADCSRA = 0b11101111; // Habilita ADC, interrupção, conversão contínua e prescaler de 128
 	ADCSRB = 0x00; // Configura modo de conversão contínua
-	DIDR0 = 0b00011111; // Desabilita o buffer digital do pino PC5
+	//DIDR0 = 0b00011111; // Desabilita o buffer digital do pino PC5
+	DIDR0 |= (1<<ADC5D); // Desabilita o buffer digital do pino PC5
 	sei(); // Habilita interrupções globais
 }
 
