@@ -12,11 +12,12 @@
 int main(void){
 	uint16_t num0 = 0, num1 = 0;
 	setupSevenSegmentDisplay();  // Inicializa os pinos do display de 7 segmentos
-
+	showAllSevenSegmentDisplay();
+	
 	while(1){
 		/**/
-		showAllSevenSegmentDisplay((num1)%10, (num1+1)%10, (num1+2)%10, (num1+3)%10);
-		
+		setAllSevenSegmentDisplayValues((num1)%10, (num1+1)%10, (num1+2)%10, (num1+3)%10);
+		_delay_ms(20);
 		num0++;
 		num1 = (num0/100)%10;
 		
