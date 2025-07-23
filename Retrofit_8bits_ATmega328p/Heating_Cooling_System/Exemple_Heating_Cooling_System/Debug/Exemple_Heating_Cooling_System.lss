@@ -3,31 +3,31 @@ Exemple_Heating_Cooling_System.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  0000031c  2**0
+  0 .data         00000000  00800100  00800100  000002d4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000002a8  00000000  00000000  00000074  2**1
+  1 .text         00000260  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800100  00800100  0000031c  2**0
+  2 .bss          00000002  00800100  00800100  000002d4  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000031c  2**0
+  3 .comment      00000030  00000000  00000000  000002d4  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000034c  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000304  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000c8  00000000  00000000  0000038c  2**0
+  5 .debug_aranges 000000c8  00000000  00000000  00000344  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000cd5  00000000  00000000  00000454  2**0
+  6 .debug_info   00000cca  00000000  00000000  0000040c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009dd  00000000  00000000  00001129  2**0
+  7 .debug_abbrev 000009dd  00000000  00000000  000010d6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000007aa  00000000  00000000  00001b06  2**0
+  8 .debug_line   000007aa  00000000  00000000  00001ab3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000158  00000000  00000000  000022b0  2**2
+  9 .debug_frame  00000158  00000000  00000000  00002260  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005dc  00000000  00000000  00002408  2**0
+ 10 .debug_str    00000668  00000000  00000000  000023b8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000241  00000000  00000000  000029e4  2**0
+ 11 .debug_loc    00000241  00000000  00000000  00002a20  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000088  00000000  00000000  00002c25  2**0
+ 12 .debug_ranges 00000088  00000000  00000000  00002c61  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -81,19 +81,13 @@ Disassembly of section .text:
   7e:	a2 30       	cpi	r26, 0x02	; 2
   80:	b2 07       	cpc	r27, r18
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
-  84:	0e 94 f5 00 	call	0x1ea	; 0x1ea <main>
-  88:	0c 94 52 01 	jmp	0x2a4	; 0x2a4 <_exit>
+  84:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <main>
+  88:	0c 94 2e 01 	jmp	0x25c	; 0x25c <_exit>
 
 0000008c <__bad_interrupt>:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000090 <__vector_21>:
-	sei(); // Habilita interrupções globais
-}
-
-uint16_t readTemperatureSensorLevel(void){
-	return TemperatureSensorLevel;
-}
   90:	1f 92       	push	r1
   92:	0f 92       	push	r0
   94:	0f b6       	in	r0, 0x3f	; 63
@@ -134,14 +128,10 @@ uint16_t readTemperatureSensorLevel(void){
   e4:	08 95       	ret
 
 000000e6 <readTemperatureDegrees>:
-
-uint16_t readTemperatureDegrees(void){
-	return  (TemperatureSensorLevel-120)/8; // Converte o nível ADC em graus Celsius (ajuste empírico)
   e6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   ea:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
   ee:	88 57       	subi	r24, 0x78	; 120
   f0:	91 09       	sbc	r25, r1
-}
   f2:	96 95       	lsr	r25
   f4:	87 95       	ror	r24
   f6:	96 95       	lsr	r25
@@ -151,12 +141,6 @@ uint16_t readTemperatureDegrees(void){
   fe:	08 95       	ret
 
 00000100 <setupUART>:
-
-// Recebe um byte pela UART (bloqueante)
-uint8_t receiveUART(void) {
-	while (!(UCSR0A & (1 << RXC0))); // Aguarda dado recebido
-	return UDR0;
-}
  100:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
  104:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
  108:	88 e1       	ldi	r24, 0x18	; 24
@@ -173,9 +157,6 @@ uint8_t receiveUART(void) {
  122:	08 95       	ret
 
 00000124 <sendASCIIFromInt>:
-
-// Envia número inteiro como string ASCII pela UART
-void sendASCIIFromInt(uint16_t num) {
  124:	0f 93       	push	r16
  126:	1f 93       	push	r17
  128:	cf 93       	push	r28
@@ -195,15 +176,11 @@ void sendASCIIFromInt(uint16_t num) {
  138:	be 01       	movw	r22, r28
  13a:	6f 5f       	subi	r22, 0xFF	; 255
  13c:	7f 4f       	sbci	r23, 0xFF	; 255
- 13e:	0e 94 1d 01 	call	0x23a	; 0x23a <__itoa_ncheck>
-	char buffer[6];
-	itoa(num, buffer, 10);
-	for (char *p = buffer; *p; p++) {
+ 13e:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <__itoa_ncheck>
  142:	8e 01       	movw	r16, r28
  144:	0f 5f       	subi	r16, 0xFF	; 255
  146:	1f 4f       	sbci	r17, 0xFF	; 255
  148:	0a c0       	rjmp	.+20     	; 0x15e <sendASCIIFromInt+0x3a>
-		transmitUART_8bits(*p);
  14a:	0e 94 8b 00 	call	0x116	; 0x116 <transmitUART_8bits>
 	#else
 		//round up by default
@@ -217,25 +194,14 @@ void sendASCIIFromInt(uint16_t num) {
  154:	f1 f7       	brne	.-4      	; 0x152 <sendASCIIFromInt+0x2e>
  156:	00 c0       	rjmp	.+0      	; 0x158 <sendASCIIFromInt+0x34>
  158:	00 00       	nop
-
-// Envia número inteiro como string ASCII pela UART
-void sendASCIIFromInt(uint16_t num) {
-	char buffer[6];
-	itoa(num, buffer, 10);
-	for (char *p = buffer; *p; p++) {
  15a:	0f 5f       	subi	r16, 0xFF	; 255
  15c:	1f 4f       	sbci	r17, 0xFF	; 255
  15e:	f8 01       	movw	r30, r16
  160:	80 81       	ld	r24, Z
  162:	81 11       	cpse	r24, r1
  164:	f2 cf       	rjmp	.-28     	; 0x14a <sendASCIIFromInt+0x26>
-		transmitUART_8bits(*p);
-		_delay_ms(2);
-	}
-	transmitUART_8bits('\n');
  166:	8a e0       	ldi	r24, 0x0A	; 10
  168:	0e 94 8b 00 	call	0x116	; 0x116 <transmitUART_8bits>
-}
  16c:	26 96       	adiw	r28, 0x06	; 6
  16e:	0f b6       	in	r0, 0x3f	; 63
  170:	f8 94       	cli
@@ -253,186 +219,146 @@ void sendASCIIFromInt(uint16_t num) {
 
 void setupHeatingCoolingSystem(void){
    
-    DDRB |= ((1 << 1) | (1 << 2));  // Configura os pinos PB1 (OC1A) e PB2 (OC1B) como saída
- 182:	84 b1       	in	r24, 0x04	; 4
- 184:	86 60       	ori	r24, 0x06	; 6
- 186:	84 b9       	out	0x04, r24	; 4
+    DDRD |= ((1 << 5) | (1 << 6));  // Configura os pinos PD5 (OC0B) e PD6 (OC0A) como saída
+ 182:	8a b1       	in	r24, 0x0a	; 10
+ 184:	80 66       	ori	r24, 0x60	; 96
+ 186:	8a b9       	out	0x0a, r24	; 10
 
     // Configura Timer1 para modo PWM rápido
-    // COM1A1:0 = 10 (não-invertido para OC1A)
-    // COM1B1:0 = 10 (não-invertido para OC1B)
+    // COM1A1:0 = 10 (não-invertido para OC0A)
+    // COM1B1:0 = 10 (não-invertido para OC0B)
     // WGM11:0 = 11 (modo 14 - Fast PWM com 0xFF como TOP)
-    TCCR1A = 0b10100011;
+    TCCR0A = 0b10100011;
  188:	83 ea       	ldi	r24, 0xA3	; 163
- 18a:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+ 18a:	84 bd       	out	0x24, r24	; 36
 
     // WGM13:2 = 10 (com os bits anteriores, forma modo 14)
     // CS10 = 1 (sem prescaler, clk/1)
-    TCCR1B = 0b00000001;
- 18e:	81 e0       	ldi	r24, 0x01	; 1
- 190:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+    TCCR0B = 0b00000011; //T = (256 * 64)/16MHz = ~1 ms 
+ 18c:	83 e0       	ldi	r24, 0x03	; 3
+ 18e:	85 bd       	out	0x25, r24	; 37
 
     // Duty cycle inicial de 0% para ambos os canais
-    OCR1A = 0; // Aquecedor
- 194:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
- 198:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
-    OCR1B = 0; // Resfriador
- 19c:	10 92 8b 00 	sts	0x008B, r1	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
- 1a0:	10 92 8a 00 	sts	0x008A, r1	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
- 1a4:	08 95       	ret
+    OCR0A = 0; // Aquecedor
+ 190:	17 bc       	out	0x27, r1	; 39
+    OCR0B = 0; // Resfriador
+ 192:	18 bc       	out	0x28, r1	; 40
+ 194:	08 95       	ret
 
-000001a6 <setHeaterDutyCycle>:
+00000196 <setHeaterDutyCycle>:
 }
 
 void setHeaterDutyCycle(uint8_t heaterDutyCycle){
     // Ajusta OCR1A proporcionalmente ao valor percentual
-    OCR1A = (1023 / 100) * heaterDutyCycle;
- 1a6:	90 e0       	ldi	r25, 0x00	; 0
- 1a8:	9c 01       	movw	r18, r24
- 1aa:	22 0f       	add	r18, r18
- 1ac:	33 1f       	adc	r19, r19
- 1ae:	88 0f       	add	r24, r24
- 1b0:	99 1f       	adc	r25, r25
- 1b2:	88 0f       	add	r24, r24
- 1b4:	99 1f       	adc	r25, r25
- 1b6:	88 0f       	add	r24, r24
- 1b8:	99 1f       	adc	r25, r25
- 1ba:	82 0f       	add	r24, r18
- 1bc:	93 1f       	adc	r25, r19
- 1be:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
- 1c2:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
- 1c6:	08 95       	ret
+    OCR0A = (255 / 100) * heaterDutyCycle;
+ 196:	88 0f       	add	r24, r24
+ 198:	87 bd       	out	0x27, r24	; 39
+ 19a:	08 95       	ret
 
-000001c8 <setCoolerDutyCycle>:
+0000019c <setCoolerDutyCycle>:
 }
 
 void setCoolerDutyCycle(uint8_t coolerDutyCycle){
     // Ajusta OCR1B proporcionalmente ao valor percentual
-    OCR1B = (1023 / 100) * coolerDutyCycle;
- 1c8:	90 e0       	ldi	r25, 0x00	; 0
- 1ca:	9c 01       	movw	r18, r24
- 1cc:	22 0f       	add	r18, r18
- 1ce:	33 1f       	adc	r19, r19
- 1d0:	88 0f       	add	r24, r24
- 1d2:	99 1f       	adc	r25, r25
- 1d4:	88 0f       	add	r24, r24
- 1d6:	99 1f       	adc	r25, r25
- 1d8:	88 0f       	add	r24, r24
- 1da:	99 1f       	adc	r25, r25
- 1dc:	82 0f       	add	r24, r18
- 1de:	93 1f       	adc	r25, r19
- 1e0:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
- 1e4:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
- 1e8:	08 95       	ret
+    OCR0B = (255 / 100) * coolerDutyCycle;
+ 19c:	88 0f       	add	r24, r24
+ 19e:	88 bd       	out	0x28, r24	; 40
+ 1a0:	08 95       	ret
 
-000001ea <main>:
+000001a2 <main>:
+ 1a2:	0e 94 c1 00 	call	0x182	; 0x182 <setupHeatingCoolingSystem>
+ 1a6:	0e 94 5e 00 	call	0xbc	; 0xbc <setupTemperatureSensor>
+ 1aa:	87 e6       	ldi	r24, 0x67	; 103
+ 1ac:	90 e0       	ldi	r25, 0x00	; 0
+ 1ae:	0e 94 80 00 	call	0x100	; 0x100 <setupUART>
+ 1b2:	0e 94 73 00 	call	0xe6	; 0xe6 <readTemperatureDegrees>
+ 1b6:	c8 2f       	mov	r28, r24
+ 1b8:	99 27       	eor	r25, r25
+ 1ba:	0e 94 92 00 	call	0x124	; 0x124 <sendASCIIFromInt>
+ 1be:	c6 34       	cpi	r28, 0x46	; 70
+ 1c0:	30 f0       	brcs	.+12     	; 0x1ce <main+0x2c>
+ 1c2:	80 e0       	ldi	r24, 0x00	; 0
+ 1c4:	0e 94 cb 00 	call	0x196	; 0x196 <setHeaterDutyCycle>
+ 1c8:	82 e3       	ldi	r24, 0x32	; 50
+ 1ca:	0e 94 ce 00 	call	0x19c	; 0x19c <setCoolerDutyCycle>
+ 1ce:	c9 32       	cpi	r28, 0x29	; 41
+ 1d0:	30 f4       	brcc	.+12     	; 0x1de <main+0x3c>
+ 1d2:	80 e0       	ldi	r24, 0x00	; 0
+ 1d4:	0e 94 ce 00 	call	0x19c	; 0x19c <setCoolerDutyCycle>
+ 1d8:	82 e3       	ldi	r24, 0x32	; 50
+ 1da:	0e 94 cb 00 	call	0x196	; 0x196 <setHeaterDutyCycle>
+ 1de:	2f ef       	ldi	r18, 0xFF	; 255
+ 1e0:	89 e6       	ldi	r24, 0x69	; 105
+ 1e2:	98 e1       	ldi	r25, 0x18	; 24
+ 1e4:	21 50       	subi	r18, 0x01	; 1
+ 1e6:	80 40       	sbci	r24, 0x00	; 0
+ 1e8:	90 40       	sbci	r25, 0x00	; 0
+ 1ea:	e1 f7       	brne	.-8      	; 0x1e4 <main+0x42>
+ 1ec:	00 c0       	rjmp	.+0      	; 0x1ee <main+0x4c>
+ 1ee:	00 00       	nop
+ 1f0:	e0 cf       	rjmp	.-64     	; 0x1b2 <main+0x10>
 
-int main(void){
-	//uint8_t dt = 0, flag = 1;
-	uint8_t temp;
-	
-	setupHeatingCoolingSystem();
- 1ea:	0e 94 c1 00 	call	0x182	; 0x182 <setupHeatingCoolingSystem>
-	setupTemperatureSensor();
- 1ee:	0e 94 5e 00 	call	0xbc	; 0xbc <setupTemperatureSensor>
-	setupUART(MYUBRR);
- 1f2:	87 e6       	ldi	r24, 0x67	; 103
- 1f4:	90 e0       	ldi	r25, 0x00	; 0
- 1f6:	0e 94 80 00 	call	0x100	; 0x100 <setupUART>
-	
-	while (1) {
-		temp = readTemperatureDegrees();
- 1fa:	0e 94 73 00 	call	0xe6	; 0xe6 <readTemperatureDegrees>
- 1fe:	c8 2f       	mov	r28, r24
-		sendASCIIFromInt(temp);
- 200:	99 27       	eor	r25, r25
- 202:	0e 94 92 00 	call	0x124	; 0x124 <sendASCIIFromInt>
-		if(temp >= 70) {setHeaterDutyCycle(0); setCoolerDutyCycle(50);}
- 206:	c6 34       	cpi	r28, 0x46	; 70
- 208:	30 f0       	brcs	.+12     	; 0x216 <main+0x2c>
- 20a:	80 e0       	ldi	r24, 0x00	; 0
- 20c:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <setHeaterDutyCycle>
- 210:	82 e3       	ldi	r24, 0x32	; 50
- 212:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <setCoolerDutyCycle>
-		if(temp <= 40) {setCoolerDutyCycle(0); setHeaterDutyCycle(50);}
- 216:	c9 32       	cpi	r28, 0x29	; 41
- 218:	30 f4       	brcc	.+12     	; 0x226 <main+0x3c>
- 21a:	80 e0       	ldi	r24, 0x00	; 0
- 21c:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <setCoolerDutyCycle>
- 220:	82 e3       	ldi	r24, 0x32	; 50
- 222:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <setHeaterDutyCycle>
- 226:	2f ef       	ldi	r18, 0xFF	; 255
- 228:	89 e6       	ldi	r24, 0x69	; 105
- 22a:	98 e1       	ldi	r25, 0x18	; 24
- 22c:	21 50       	subi	r18, 0x01	; 1
- 22e:	80 40       	sbci	r24, 0x00	; 0
- 230:	90 40       	sbci	r25, 0x00	; 0
- 232:	e1 f7       	brne	.-8      	; 0x22c <main+0x42>
- 234:	00 c0       	rjmp	.+0      	; 0x236 <main+0x4c>
- 236:	00 00       	nop
- 238:	e0 cf       	rjmp	.-64     	; 0x1fa <main+0x10>
+000001f2 <__itoa_ncheck>:
+ 1f2:	bb 27       	eor	r27, r27
+ 1f4:	4a 30       	cpi	r20, 0x0A	; 10
+ 1f6:	31 f4       	brne	.+12     	; 0x204 <__itoa_ncheck+0x12>
+ 1f8:	99 23       	and	r25, r25
+ 1fa:	22 f4       	brpl	.+8      	; 0x204 <__itoa_ncheck+0x12>
+ 1fc:	bd e2       	ldi	r27, 0x2D	; 45
+ 1fe:	90 95       	com	r25
+ 200:	81 95       	neg	r24
+ 202:	9f 4f       	sbci	r25, 0xFF	; 255
+ 204:	0c 94 05 01 	jmp	0x20a	; 0x20a <__utoa_common>
 
-0000023a <__itoa_ncheck>:
- 23a:	bb 27       	eor	r27, r27
- 23c:	4a 30       	cpi	r20, 0x0A	; 10
- 23e:	31 f4       	brne	.+12     	; 0x24c <__itoa_ncheck+0x12>
- 240:	99 23       	and	r25, r25
- 242:	22 f4       	brpl	.+8      	; 0x24c <__itoa_ncheck+0x12>
- 244:	bd e2       	ldi	r27, 0x2D	; 45
- 246:	90 95       	com	r25
- 248:	81 95       	neg	r24
- 24a:	9f 4f       	sbci	r25, 0xFF	; 255
- 24c:	0c 94 29 01 	jmp	0x252	; 0x252 <__utoa_common>
+00000208 <__utoa_ncheck>:
+ 208:	bb 27       	eor	r27, r27
 
-00000250 <__utoa_ncheck>:
- 250:	bb 27       	eor	r27, r27
+0000020a <__utoa_common>:
+ 20a:	fb 01       	movw	r30, r22
+ 20c:	55 27       	eor	r21, r21
+ 20e:	aa 27       	eor	r26, r26
+ 210:	88 0f       	add	r24, r24
+ 212:	99 1f       	adc	r25, r25
+ 214:	aa 1f       	adc	r26, r26
+ 216:	a4 17       	cp	r26, r20
+ 218:	10 f0       	brcs	.+4      	; 0x21e <__utoa_common+0x14>
+ 21a:	a4 1b       	sub	r26, r20
+ 21c:	83 95       	inc	r24
+ 21e:	50 51       	subi	r21, 0x10	; 16
+ 220:	b9 f7       	brne	.-18     	; 0x210 <__utoa_common+0x6>
+ 222:	a0 5d       	subi	r26, 0xD0	; 208
+ 224:	aa 33       	cpi	r26, 0x3A	; 58
+ 226:	08 f0       	brcs	.+2      	; 0x22a <__utoa_common+0x20>
+ 228:	a9 5d       	subi	r26, 0xD9	; 217
+ 22a:	a1 93       	st	Z+, r26
+ 22c:	00 97       	sbiw	r24, 0x00	; 0
+ 22e:	79 f7       	brne	.-34     	; 0x20e <__utoa_common+0x4>
+ 230:	b1 11       	cpse	r27, r1
+ 232:	b1 93       	st	Z+, r27
+ 234:	11 92       	st	Z+, r1
+ 236:	cb 01       	movw	r24, r22
+ 238:	0c 94 1e 01 	jmp	0x23c	; 0x23c <strrev>
 
-00000252 <__utoa_common>:
- 252:	fb 01       	movw	r30, r22
- 254:	55 27       	eor	r21, r21
- 256:	aa 27       	eor	r26, r26
- 258:	88 0f       	add	r24, r24
- 25a:	99 1f       	adc	r25, r25
- 25c:	aa 1f       	adc	r26, r26
- 25e:	a4 17       	cp	r26, r20
- 260:	10 f0       	brcs	.+4      	; 0x266 <__utoa_common+0x14>
- 262:	a4 1b       	sub	r26, r20
- 264:	83 95       	inc	r24
- 266:	50 51       	subi	r21, 0x10	; 16
- 268:	b9 f7       	brne	.-18     	; 0x258 <__utoa_common+0x6>
- 26a:	a0 5d       	subi	r26, 0xD0	; 208
- 26c:	aa 33       	cpi	r26, 0x3A	; 58
- 26e:	08 f0       	brcs	.+2      	; 0x272 <__utoa_common+0x20>
- 270:	a9 5d       	subi	r26, 0xD9	; 217
- 272:	a1 93       	st	Z+, r26
- 274:	00 97       	sbiw	r24, 0x00	; 0
- 276:	79 f7       	brne	.-34     	; 0x256 <__utoa_common+0x4>
- 278:	b1 11       	cpse	r27, r1
- 27a:	b1 93       	st	Z+, r27
- 27c:	11 92       	st	Z+, r1
- 27e:	cb 01       	movw	r24, r22
- 280:	0c 94 42 01 	jmp	0x284	; 0x284 <strrev>
+0000023c <strrev>:
+ 23c:	dc 01       	movw	r26, r24
+ 23e:	fc 01       	movw	r30, r24
+ 240:	67 2f       	mov	r22, r23
+ 242:	71 91       	ld	r23, Z+
+ 244:	77 23       	and	r23, r23
+ 246:	e1 f7       	brne	.-8      	; 0x240 <strrev+0x4>
+ 248:	32 97       	sbiw	r30, 0x02	; 2
+ 24a:	04 c0       	rjmp	.+8      	; 0x254 <strrev+0x18>
+ 24c:	7c 91       	ld	r23, X
+ 24e:	6d 93       	st	X+, r22
+ 250:	70 83       	st	Z, r23
+ 252:	62 91       	ld	r22, -Z
+ 254:	ae 17       	cp	r26, r30
+ 256:	bf 07       	cpc	r27, r31
+ 258:	c8 f3       	brcs	.-14     	; 0x24c <strrev+0x10>
+ 25a:	08 95       	ret
 
-00000284 <strrev>:
- 284:	dc 01       	movw	r26, r24
- 286:	fc 01       	movw	r30, r24
- 288:	67 2f       	mov	r22, r23
- 28a:	71 91       	ld	r23, Z+
- 28c:	77 23       	and	r23, r23
- 28e:	e1 f7       	brne	.-8      	; 0x288 <strrev+0x4>
- 290:	32 97       	sbiw	r30, 0x02	; 2
- 292:	04 c0       	rjmp	.+8      	; 0x29c <strrev+0x18>
- 294:	7c 91       	ld	r23, X
- 296:	6d 93       	st	X+, r22
- 298:	70 83       	st	Z, r23
- 29a:	62 91       	ld	r22, -Z
- 29c:	ae 17       	cp	r26, r30
- 29e:	bf 07       	cpc	r27, r31
- 2a0:	c8 f3       	brcs	.-14     	; 0x294 <strrev+0x10>
- 2a2:	08 95       	ret
+0000025c <_exit>:
+ 25c:	f8 94       	cli
 
-000002a4 <_exit>:
- 2a4:	f8 94       	cli
-
-000002a6 <__stop_program>:
- 2a6:	ff cf       	rjmp	.-2      	; 0x2a6 <__stop_program>
+0000025e <__stop_program>:
+ 25e:	ff cf       	rjmp	.-2      	; 0x25e <__stop_program>
