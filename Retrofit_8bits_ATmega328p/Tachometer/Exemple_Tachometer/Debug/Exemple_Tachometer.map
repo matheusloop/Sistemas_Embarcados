@@ -4,6 +4,8 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
                               main.o (__do_clear_bss)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                              heating_cooling_system.o (__umulhisi3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
                               UART_Lib.o (__itoa_ncheck)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
@@ -18,8 +20,6 @@ Discarded input sections
  .text          0x00000000        0x0 heating_cooling_system.o
  .data          0x00000000        0x0 heating_cooling_system.o
  .bss           0x00000000        0x0 heating_cooling_system.o
- .text.setupHeatingCoolingSystem
-                0x00000000       0x24 heating_cooling_system.o
  .text.setHeaterDutyCycle
                 0x00000000       0x22 heating_cooling_system.o
  .text          0x00000000        0x0 UART_Lib.o
@@ -64,6 +64,20 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
@@ -202,7 +216,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x222
+.text           0x00000000      0x29a
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -286,38 +300,44 @@ END GROUP
                 0x0000008c                __vector_20
                 0x00000090                . = ALIGN (0x2)
  *(.text.*)
+ .text.setupHeatingCoolingSystem
+                0x00000090       0x14 heating_cooling_system.o
+                0x00000090                setupHeatingCoolingSystem
  .text.setCoolerDutyCycle
-                0x00000090       0x22 heating_cooling_system.o
-                0x00000090                setCoolerDutyCycle
+                0x000000a4       0x22 heating_cooling_system.o
+                0x000000a4                setCoolerDutyCycle
  .text.setupUART
-                0x000000b2       0x16 UART_Lib.o
-                0x000000b2                setupUART
+                0x000000c6       0x16 UART_Lib.o
+                0x000000c6                setupUART
  .text.transmitUART_8bits
-                0x000000c8        0xe UART_Lib.o
-                0x000000c8                transmitUART_8bits
+                0x000000dc        0xe UART_Lib.o
+                0x000000dc                transmitUART_8bits
  .text.sendASCIIFromInt
-                0x000000d6       0x5e UART_Lib.o
-                0x000000d6                sendASCIIFromInt
+                0x000000ea       0x5e UART_Lib.o
+                0x000000ea                sendASCIIFromInt
  .text.__vector_10
-                0x00000134       0x38 main.o
-                0x00000134                __vector_10
- .text.main     0x0000016c       0x48 main.o
-                0x0000016c                main
+                0x00000148       0x7a main.o
+                0x00000148                __vector_10
+ .text.main     0x000001c2       0x4c main.o
+                0x000001c2                main
+ .text.libgcc.mul
+                0x0000020e       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x0000020e                __umulhisi3
  .text.avr-libc
-                0x000001b4       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x000001b4                __itoa_ncheck
+                0x0000022c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x0000022c                __itoa_ncheck
  .text.avr-libc
-                0x000001ca       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x000001ca                __utoa_ncheck
-                0x000001cc                __utoa_common
+                0x00000242       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x00000242                __utoa_ncheck
+                0x00000244                __utoa_common
  .text.avr-libc
-                0x000001fe       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x000001fe                strrev
-                0x0000021e                . = ALIGN (0x2)
+                0x00000276       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00000276                strrev
+                0x00000296                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000021e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000021e                _exit
-                0x0000021e                exit
+ .fini9         0x00000296        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000296                _exit
+                0x00000296                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -336,11 +356,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000021e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000296        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000222                _etext = .
+                0x0000029a                _etext = .
 
-.data           0x00800100        0x0 load address 0x00000222
+.data           0x00800100        0x0 load address 0x0000029a
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -352,23 +372,26 @@ END GROUP
                 0x00800100                _edata = .
                 [!provide]                PROVIDE (__data_end, .)
 
-.bss            0x00800100        0x2
+.bss            0x00800100        0x4
                 0x00800100                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.tempo_borda_subida
+ .bss.tempo_delta
                 0x00800100        0x2 main.o
-                0x00800100                tempo_borda_subida
+                0x00800100                tempo_delta
+ .bss.tempo_borda_subida
+                0x00800102        0x2 main.o
+                0x00800102                tempo_borda_subida
  *(COMMON)
-                0x00800102                PROVIDE (__bss_end, .)
-                0x00000222                __data_load_start = LOADADDR (.data)
-                0x00000222                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800104                PROVIDE (__bss_end, .)
+                0x0000029a                __data_load_start = LOADADDR (.data)
+                0x0000029a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800102        0x0
+.noinit         0x00800104        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800102                _end = .
+                0x00800104                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -447,12 +470,12 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xb8a
+.debug_info     0x00000000      0xbb2
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4       0xde heating_cooling_system.o
  .debug_info    0x000006d2      0x315 UART_Lib.o
- .debug_info    0x000009e7      0x1a3 main.o
+ .debug_info    0x000009e7      0x1cb main.o
 
 .debug_abbrev   0x00000000      0x958
  *(.debug_abbrev)
@@ -461,34 +484,34 @@ END GROUP
  .debug_abbrev  0x00000634      0x1fc UART_Lib.o
  .debug_abbrev  0x00000830      0x128 main.o
 
-.debug_line     0x00000000      0x65e
+.debug_line     0x00000000      0x666
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x12b heating_cooling_system.o
  .debug_line    0x0000025f      0x20d UART_Lib.o
- .debug_line    0x0000046c      0x1f2 main.o
+ .debug_line    0x0000046c      0x1fa main.o
 
-.debug_frame    0x00000000      0x120
+.debug_frame    0x00000000      0x128
  *(.debug_frame)
  .debug_frame   0x00000000       0x44 heating_cooling_system.o
  .debug_frame   0x00000044       0x88 UART_Lib.o
- .debug_frame   0x000000cc       0x54 main.o
+ .debug_frame   0x000000cc       0x5c main.o
 
-.debug_str      0x00000000      0x55b
+.debug_str      0x00000000      0x517
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x21d heating_cooling_system.o
-                                0x251 (size before relaxing)
- .debug_str     0x00000425      0x106 UART_Lib.o
-                                0x2ad (size before relaxing)
- .debug_str     0x0000052b       0x30 main.o
-                                0x246 (size before relaxing)
+ .debug_str     0x00000208      0x1cd heating_cooling_system.o
+                                0x201 (size before relaxing)
+ .debug_str     0x000003d5      0x106 UART_Lib.o
+                                0x25d (size before relaxing)
+ .debug_str     0x000004db       0x3c main.o
+                                0x21c (size before relaxing)
 
-.debug_loc      0x00000000      0x248
+.debug_loc      0x00000000      0x262
  *(.debug_loc)
  .debug_loc     0x00000000       0x42 heating_cooling_system.o
  .debug_loc     0x00000042      0x1a3 UART_Lib.o
- .debug_loc     0x000001e5       0x63 main.o
+ .debug_loc     0x000001e5       0x7d main.o
 
 .debug_macinfo
  *(.debug_macinfo)

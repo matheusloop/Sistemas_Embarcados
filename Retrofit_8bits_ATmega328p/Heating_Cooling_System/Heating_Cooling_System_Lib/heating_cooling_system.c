@@ -23,10 +23,10 @@ void setupHeatingCoolingSystem(void){
 
 void setHeaterDutyCycle(uint8_t heaterDutyCycle){
     // Ajusta OCR1A proporcionalmente ao valor percentual
-    OCR0A = (255 / 100) * heaterDutyCycle;
+    OCR0A = (255 *(uint16_t)heaterDutyCycle) / 100 ;
 }
 
 void setCoolerDutyCycle(uint8_t coolerDutyCycle){
     // Ajusta OCR1B proporcionalmente ao valor percentual
-    OCR0B = (255 / 100) * coolerDutyCycle;
+    OCR0B = (255 *(uint16_t)coolerDutyCycle) / 100;
 }

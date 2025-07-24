@@ -480,13 +480,13 @@ END GROUP
  .debug_abbrev  0x00000832       0x92 heating_cooling_system.o
  .debug_abbrev  0x000008c4      0x119 main.o
 
-.debug_line     0x00000000      0x7aa
+.debug_line     0x00000000      0x7a0
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x14d temperature_sensor.o
  .debug_line    0x00000281      0x20d UART_Lib.o
  .debug_line    0x0000048e      0x111 heating_cooling_system.o
- .debug_line    0x0000059f      0x20b main.o
+ .debug_line    0x0000059f      0x201 main.o
 
 .debug_frame    0x00000000      0x158
  *(.debug_frame)
@@ -495,17 +495,17 @@ END GROUP
  .debug_frame   0x000000f0       0x44 heating_cooling_system.o
  .debug_frame   0x00000134       0x24 main.o
 
-.debug_str      0x00000000      0x668
+.debug_str      0x00000000      0x618
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x218 temperature_sensor.o
                                 0x263 (size before relaxing)
- .debug_str     0x00000420      0x198 UART_Lib.o
-                                0x2c5 (size before relaxing)
- .debug_str     0x000005b8       0x9a heating_cooling_system.o
-                                0x240 (size before relaxing)
- .debug_str     0x00000652       0x16 main.o
-                                0x290 (size before relaxing)
+ .debug_str     0x00000420      0x148 UART_Lib.o
+                                0x275 (size before relaxing)
+ .debug_str     0x00000568       0x9a heating_cooling_system.o
+                                0x1f6 (size before relaxing)
+ .debug_str     0x00000602       0x16 main.o
+                                0x246 (size before relaxing)
 
 .debug_loc      0x00000000      0x24d
  *(.debug_loc)

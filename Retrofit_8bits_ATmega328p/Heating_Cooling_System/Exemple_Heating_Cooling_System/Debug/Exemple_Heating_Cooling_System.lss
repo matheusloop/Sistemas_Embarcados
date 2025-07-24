@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 000009dd  00000000  00000000  000010d6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000007aa  00000000  00000000  00001ab3  2**0
+  8 .debug_line   000007a0  00000000  00000000  00001ab3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000158  00000000  00000000  00002260  2**2
+  9 .debug_frame  00000158  00000000  00000000  00002254  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000668  00000000  00000000  000023b8  2**0
+ 10 .debug_str    00000618  00000000  00000000  000023ac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000024d  00000000  00000000  00002a20  2**0
+ 11 .debug_loc    0000024d  00000000  00000000  000029c4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000088  00000000  00000000  00002c6d  2**0
+ 12 .debug_ranges 00000088  00000000  00000000  00002c11  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -88,12 +88,6 @@ Disassembly of section .text:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000090 <__vector_21>:
-	sei(); // Habilita interrupções globais
-}
-
-uint16_t readTemperatureSensorLevel(void){
-	return TemperatureSensorLevel;
-}
   90:	1f 92       	push	r1
   92:	0f 92       	push	r0
   94:	0f b6       	in	r0, 0x3f	; 63
@@ -134,14 +128,10 @@ uint16_t readTemperatureSensorLevel(void){
   e4:	08 95       	ret
 
 000000e6 <readTemperatureDegrees>:
-
-uint16_t readTemperatureDegrees(void){
-	return  (TemperatureSensorLevel-120)/8; // Converte o nível ADC em graus Celsius (ajuste empírico)
   e6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   ea:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
   ee:	88 57       	subi	r24, 0x78	; 120
   f0:	91 09       	sbc	r25, r1
-}
   f2:	96 95       	lsr	r25
   f4:	87 95       	ror	r24
   f6:	96 95       	lsr	r25
@@ -151,6 +141,12 @@ uint16_t readTemperatureDegrees(void){
   fe:	08 95       	ret
 
 00000100 <setupUART>:
+
+// Recebe um byte pela UART (bloqueante)
+uint8_t receiveUART(void) {
+	while (!(UCSR0A & (1 << RXC0))); // Aguarda dado recebido
+	return UDR0;
+}
  100:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
  104:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
  108:	88 e1       	ldi	r24, 0x18	; 24
@@ -167,6 +163,9 @@ uint16_t readTemperatureDegrees(void){
  122:	08 95       	ret
 
 00000124 <sendASCIIFromInt>:
+
+// Envia número inteiro como string ASCII pela UART
+void sendASCIIFromInt(uint16_t num) {
  124:	0f 93       	push	r16
  126:	1f 93       	push	r17
  128:	cf 93       	push	r28
@@ -187,10 +186,14 @@ uint16_t readTemperatureDegrees(void){
  13a:	6f 5f       	subi	r22, 0xFF	; 255
  13c:	7f 4f       	sbci	r23, 0xFF	; 255
  13e:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <__itoa_ncheck>
+	char buffer[6];
+	itoa(num, buffer, 10);
+	for (char *p = buffer; *p; p++) {
  142:	8e 01       	movw	r16, r28
  144:	0f 5f       	subi	r16, 0xFF	; 255
  146:	1f 4f       	sbci	r17, 0xFF	; 255
  148:	0a c0       	rjmp	.+20     	; 0x15e <sendASCIIFromInt+0x3a>
+		transmitUART_8bits(*p);
  14a:	0e 94 8b 00 	call	0x116	; 0x116 <transmitUART_8bits>
 	#else
 		//round up by default
@@ -204,14 +207,25 @@ uint16_t readTemperatureDegrees(void){
  154:	f1 f7       	brne	.-4      	; 0x152 <sendASCIIFromInt+0x2e>
  156:	00 c0       	rjmp	.+0      	; 0x158 <sendASCIIFromInt+0x34>
  158:	00 00       	nop
+
+// Envia número inteiro como string ASCII pela UART
+void sendASCIIFromInt(uint16_t num) {
+	char buffer[6];
+	itoa(num, buffer, 10);
+	for (char *p = buffer; *p; p++) {
  15a:	0f 5f       	subi	r16, 0xFF	; 255
  15c:	1f 4f       	sbci	r17, 0xFF	; 255
  15e:	f8 01       	movw	r30, r16
  160:	80 81       	ld	r24, Z
  162:	81 11       	cpse	r24, r1
  164:	f2 cf       	rjmp	.-28     	; 0x14a <sendASCIIFromInt+0x26>
+		transmitUART_8bits(*p);
+		_delay_ms(2);
+	}
+	transmitUART_8bits('\n');
  166:	8a e0       	ldi	r24, 0x0A	; 10
  168:	0e 94 8b 00 	call	0x116	; 0x116 <transmitUART_8bits>
+}
  16c:	26 96       	adiw	r28, 0x06	; 6
  16e:	0f b6       	in	r0, 0x3f	; 63
  170:	f8 94       	cli
