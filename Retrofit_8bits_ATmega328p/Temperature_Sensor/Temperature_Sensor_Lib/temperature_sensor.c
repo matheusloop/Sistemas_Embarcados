@@ -1,6 +1,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#include "temperature_sensor.h"
+
 uint16_t TemperatureSensorLevel = 0;
 
 ISR(ADC_vect){

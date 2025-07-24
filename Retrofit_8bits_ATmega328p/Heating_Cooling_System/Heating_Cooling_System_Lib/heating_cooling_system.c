@@ -1,5 +1,7 @@
 #include <avr/io.h>
 
+#include "heating_cooling_system.h"
+
 void setupHeatingCoolingSystem(void){
    
     DDRD |= ((1 << 5) | (1 << 6));  // Configura os pinos PD5 (OC0B) e PD6 (OC0A) como saída

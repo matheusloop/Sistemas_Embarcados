@@ -25,9 +25,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  10 .debug_str    00000668  00000000  00000000  000023b8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000241  00000000  00000000  00002a20  2**0
+ 11 .debug_loc    0000024d  00000000  00000000  00002a20  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000088  00000000  00000000  00002c61  2**0
+ 12 .debug_ranges 00000088  00000000  00000000  00002c6d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -88,6 +88,12 @@ Disassembly of section .text:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000090 <__vector_21>:
+	sei(); // Habilita interrupções globais
+}
+
+uint16_t readTemperatureSensorLevel(void){
+	return TemperatureSensorLevel;
+}
   90:	1f 92       	push	r1
   92:	0f 92       	push	r0
   94:	0f b6       	in	r0, 0x3f	; 63
@@ -128,10 +134,14 @@ Disassembly of section .text:
   e4:	08 95       	ret
 
 000000e6 <readTemperatureDegrees>:
+
+uint16_t readTemperatureDegrees(void){
+	return  (TemperatureSensorLevel-120)/8; // Converte o nível ADC em graus Celsius (ajuste empírico)
   e6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   ea:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
   ee:	88 57       	subi	r24, 0x78	; 120
   f0:	91 09       	sbc	r25, r1
+}
   f2:	96 95       	lsr	r25
   f4:	87 95       	ror	r24
   f6:	96 95       	lsr	r25
@@ -215,7 +225,8 @@ Disassembly of section .text:
  180:	08 95       	ret
 
 00000182 <setupHeatingCoolingSystem>:
-#include <avr/io.h>
+
+#include "heating_cooling_system.h"
 
 void setupHeatingCoolingSystem(void){
    
@@ -266,21 +277,35 @@ void setCoolerDutyCycle(uint8_t coolerDutyCycle){
  1a0:	08 95       	ret
 
 000001a2 <main>:
+
+int main(void){
+	//uint8_t dt = 0, flag = 1;
+	uint8_t temp = 0;
+	
+	setupHeatingCoolingSystem();
  1a2:	0e 94 c1 00 	call	0x182	; 0x182 <setupHeatingCoolingSystem>
+	setupTemperatureSensor();
  1a6:	0e 94 5e 00 	call	0xbc	; 0xbc <setupTemperatureSensor>
+	setupUART(MYUBRR);
  1aa:	87 e6       	ldi	r24, 0x67	; 103
  1ac:	90 e0       	ldi	r25, 0x00	; 0
  1ae:	0e 94 80 00 	call	0x100	; 0x100 <setupUART>
+	
+	while (1) {
+		temp = readTemperatureDegrees();
  1b2:	0e 94 73 00 	call	0xe6	; 0xe6 <readTemperatureDegrees>
  1b6:	c8 2f       	mov	r28, r24
+		sendASCIIFromInt(temp);
  1b8:	99 27       	eor	r25, r25
  1ba:	0e 94 92 00 	call	0x124	; 0x124 <sendASCIIFromInt>
+		if(temp >= 70) {setHeaterDutyCycle(0); setCoolerDutyCycle(50);}
  1be:	c6 34       	cpi	r28, 0x46	; 70
  1c0:	30 f0       	brcs	.+12     	; 0x1ce <main+0x2c>
  1c2:	80 e0       	ldi	r24, 0x00	; 0
  1c4:	0e 94 cb 00 	call	0x196	; 0x196 <setHeaterDutyCycle>
  1c8:	82 e3       	ldi	r24, 0x32	; 50
  1ca:	0e 94 ce 00 	call	0x19c	; 0x19c <setCoolerDutyCycle>
+		if(temp <= 40) {setCoolerDutyCycle(0); setHeaterDutyCycle(50);}
  1ce:	c9 32       	cpi	r28, 0x29	; 41
  1d0:	30 f4       	brcc	.+12     	; 0x1de <main+0x3c>
  1d2:	80 e0       	ldi	r24, 0x00	; 0

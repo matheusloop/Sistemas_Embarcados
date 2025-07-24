@@ -8,7 +8,7 @@
 
 int main(void){
 	//uint8_t dt = 0, flag = 1;
-	uint8_t temp;
+	uint8_t temp = 0;
 	
 	setupHeatingCoolingSystem();
 	setupTemperatureSensor();
@@ -20,6 +20,7 @@ int main(void){
 		if(temp >= 70) {setHeaterDutyCycle(0); setCoolerDutyCycle(50);}
 		if(temp <= 40) {setCoolerDutyCycle(0); setHeaterDutyCycle(50);}
 		_delay_ms(500);
+
 	}
 }
 

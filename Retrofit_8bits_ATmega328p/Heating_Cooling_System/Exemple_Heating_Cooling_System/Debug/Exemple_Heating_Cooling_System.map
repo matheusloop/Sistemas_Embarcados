@@ -498,21 +498,21 @@ END GROUP
 .debug_str      0x00000000      0x668
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x21e temperature_sensor.o
-                                0x269 (size before relaxing)
- .debug_str     0x00000426      0x106 UART_Lib.o
+ .debug_str     0x00000208      0x218 temperature_sensor.o
+                                0x263 (size before relaxing)
+ .debug_str     0x00000420      0x198 UART_Lib.o
                                 0x2c5 (size before relaxing)
- .debug_str     0x0000052c      0x126 heating_cooling_system.o
+ .debug_str     0x000005b8       0x9a heating_cooling_system.o
                                 0x240 (size before relaxing)
  .debug_str     0x00000652       0x16 main.o
-                                0x296 (size before relaxing)
+                                0x290 (size before relaxing)
 
-.debug_loc      0x00000000      0x241
+.debug_loc      0x00000000      0x24d
  *(.debug_loc)
  .debug_loc     0x00000000       0x49 temperature_sensor.o
  .debug_loc     0x00000049      0x1a3 UART_Lib.o
  .debug_loc     0x000001ec       0x42 heating_cooling_system.o
- .debug_loc     0x0000022e       0x13 main.o
+ .debug_loc     0x0000022e       0x1f main.o
 
 .debug_macinfo
  *(.debug_macinfo)
