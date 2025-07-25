@@ -6,5 +6,7 @@
 
 ..\..\Temperature_Sensor\UART_Lib\UART_Lib.c
 
+..\Tachometer_Lib\tachometer.c
+
 main.c
 

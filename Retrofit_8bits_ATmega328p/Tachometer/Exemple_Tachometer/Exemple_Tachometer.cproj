@@ -136,6 +136,14 @@
       <SubType>compile</SubType>
       <Link>UART_Lib.h</Link>
     </Compile>
+    <Compile Include="..\Tachometer_Lib\tachometer.c">
+      <SubType>compile</SubType>
+      <Link>tachometer.c</Link>
+    </Compile>
+    <Compile Include="..\Tachometer_Lib\tachometer.h">
+      <SubType>compile</SubType>
+      <Link>tachometer.h</Link>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
