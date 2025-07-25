@@ -97,7 +97,7 @@ ISR(TIMER2_OVF_vect) {
 
 void showAllSevenSegmentDisplay(void) {
 	// Configura o Timer2 para modo normal e prescaler de 256 (~4ms entre overflows)
-	TCCR2A = 0x00						//Modo de operação normal
+	TCCR2A = 0x00;						//Modo de operação normal
 	TCCR2B |= (1<<CS22);                // Prescaler = 256
 	TIMSK2 |= (1<<TOIE2);               // Habilita interrupção por overflow do Timer2
 	sei();                              // Habilita interrupções globais

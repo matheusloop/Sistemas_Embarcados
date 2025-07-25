@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 0000077b  00000000  00000000  00000e69  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000502  00000000  00000000  000015e4  2**0
+  8 .debug_line   00000501  00000000  00000000  000015e4  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000000fc  00000000  00000000  00001ae8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000054b  00000000  00000000  00001be4  2**0
+ 10 .debug_str    000005db  00000000  00000000  00001be4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000220  00000000  00000000  0000212f  2**0
+ 11 .debug_loc    00000220  00000000  00000000  000021bf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  0000234f  2**0
+ 12 .debug_ranges 00000050  00000000  00000000  000023df  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -366,31 +366,12 @@ void setAllSevenSegmentDisplayValues(uint8_t valueDisp_0, uint8_t valueDisp_1, u
  1fe:	08 95       	ret
 
 00000200 <main>:
-// FUNÇÃO PRINCIPAL
-// ========================
-
-int main(void){
-	uint16_t num0 = 0, num1 = 0;
-	setupSevenSegmentDisplay();  // Inicializa os pinos do display de 7 segmentos
  200:	0e 94 53 00 	call	0xa6	; 0xa6 <setupSevenSegmentDisplay>
-	showAllSevenSegmentDisplay();
  204:	0e 94 ed 00 	call	0x1da	; 0x1da <showAllSevenSegmentDisplay>
-// ========================
-// FUNÇÃO PRINCIPAL
-// ========================
-
-int main(void){
-	uint16_t num0 = 0, num1 = 0;
  208:	e0 e0       	ldi	r30, 0x00	; 0
  20a:	f0 e0       	ldi	r31, 0x00	; 0
  20c:	00 e0       	ldi	r16, 0x00	; 0
  20e:	10 e0       	ldi	r17, 0x00	; 0
-	setupSevenSegmentDisplay();  // Inicializa os pinos do display de 7 segmentos
-	showAllSevenSegmentDisplay();
-	
-	while(1){
-		/**/
-		setAllSevenSegmentDisplayValues((num1)%10, (num1+1)%10, (num1+2)%10, (num1+3)%10);
  210:	af 01       	movw	r20, r30
  212:	4d 5f       	subi	r20, 0xFD	; 253
  214:	5f 4f       	sbci	r21, 0xFF	; 255
@@ -512,11 +493,8 @@ int main(void){
  2fa:	e1 f7       	brne	.-8      	; 0x2f4 <main+0xf4>
  2fc:	00 c0       	rjmp	.+0      	; 0x2fe <main+0xfe>
  2fe:	00 00       	nop
-		_delay_ms(20);
-		num0++;
  300:	0f 5f       	subi	r16, 0xFF	; 255
  302:	1f 4f       	sbci	r17, 0xFF	; 255
-		num1 = (num0/100)%10;
  304:	98 01       	movw	r18, r16
  306:	36 95       	lsr	r19
  308:	27 95       	ror	r18

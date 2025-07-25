@@ -1,0 +1,23 @@
+|ATmega328p | PIC16F877A |
+
+//Display de Sete Segmentos
+PB1 -> RD0 (SegA)
+PB2 -> RD1 (SegB)
+PB3 -> RD2 (SegC)
+PB4 -> RD3 (SegD)
+PD2 -> RD4 (SegE)
+PD3 -> RD5 (SegF)
+PD4 -> RD6 (SegG)
+
+PC0 -> RB7 (EN0)
+PC1 -> RB6 (EN1)
+PC2 -> RB5 (EN2)
+PC3 -> RB4 (EN3)
+
+//Aquecimento e Resfriamento
+PD5 -> RC1 (Resfriador)
+PD6 -> RC2 (Aquecedor)
+
+PC5 -> RA0 (Sensor de Temperatura)
+
+PB0 -> RC0 (Tacômetro)
