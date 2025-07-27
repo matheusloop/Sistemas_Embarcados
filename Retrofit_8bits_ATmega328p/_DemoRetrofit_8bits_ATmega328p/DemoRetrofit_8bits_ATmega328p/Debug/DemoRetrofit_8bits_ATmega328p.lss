@@ -275,7 +275,7 @@ uint16_t getTemperatureSensorLevel(void){
  20c:	0e 94 d1 02 	call	0x5a2	; 0x5a2 <__umulhisi3>
  210:	96 95       	lsr	r25
  212:	87 95       	ror	r24
- 214:	87 bd       	out	0x27, r24	; 39
+ 214:	88 bd       	out	0x28, r24	; 40
  216:	08 95       	ret
 
 00000218 <setCoolerDutyCycle>:
@@ -293,7 +293,7 @@ uint16_t getTemperatureSensorLevel(void){
  22e:	0e 94 d1 02 	call	0x5a2	; 0x5a2 <__umulhisi3>
  232:	96 95       	lsr	r25
  234:	87 95       	ror	r24
- 236:	88 bd       	out	0x28, r24	; 40
+ 236:	87 bd       	out	0x27, r24	; 39
  238:	08 95       	ret
 
 0000023a <getTemperatureDegrees>:
@@ -332,23 +332,23 @@ static uint8_t actualDisplay = 0;
 static uint8_t displaysValues[4] = {0, 0, 0, 0};
 
 void setupSevenSegmentDisplay(void) {
-	// Define os pinos PB1–PB4 como saída para os segmentos A, B, C e D
-	DDRB |= (1<<DDB1) | (1<<DDB2) | (1<<DDB3) | (1<<DDB4);
- 266:	84 b1       	in	r24, 0x04	; 4
- 268:	8e 61       	ori	r24, 0x1E	; 30
- 26a:	84 b9       	out	0x04, r24	; 4
-	
-	// Define os pinos PD2–PD4 como saída para os segmentos E, F e G
-	DDRD |= (1<<DDD2) | (1<<DDD3) | (1<<DDD4);
- 26c:	8a b1       	in	r24, 0x0a	; 10
- 26e:	8c 61       	ori	r24, 0x1C	; 28
- 270:	8a b9       	out	0x0a, r24	; 10
-	
-	// Define os pinos PC0–PC3 como saída para habilitação dos displays (EN0 a EN3)
+	// Define os pinos PC0–PC3 como saída para os segmentos A, B, C e D
 	DDRC |= (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3);
- 272:	87 b1       	in	r24, 0x07	; 7
- 274:	8f 60       	ori	r24, 0x0F	; 15
- 276:	87 b9       	out	0x07, r24	; 7
+ 266:	87 b1       	in	r24, 0x07	; 7
+ 268:	8f 60       	ori	r24, 0x0F	; 15
+ 26a:	87 b9       	out	0x07, r24	; 7
+	
+	// Define os pinos PB1–PB3 como saída para os segmentos E, F e G
+	DDRB |= (1<<DDB1) | (1<<DDB2) | (1<<DDB3);
+ 26c:	84 b1       	in	r24, 0x04	; 4
+ 26e:	8e 60       	ori	r24, 0x0E	; 14
+ 270:	84 b9       	out	0x04, r24	; 4
+	
+	// Define os pinos PD2, PD3, PD4 e PD7 como saída para habilitação dos displays (EN0 a EN3)
+	DDRD |= (1<<DDD2) | (1<<DDD3) | (1<<DDD4) | (1<<DDD7);
+ 272:	8a b1       	in	r24, 0x0a	; 10
+ 274:	8c 69       	ori	r24, 0x9C	; 156
+ 276:	8a b9       	out	0x0a, r24	; 10
  278:	08 95       	ret
 
 0000027a <activeSegments>:
@@ -356,48 +356,48 @@ void setupSevenSegmentDisplay(void) {
 
 void activeSegments(uint8_t segmentCode) {
 	// Ativa os segmentos com base no valor binário fornecido
-	if (segmentCode & (1<<6)) PORTB |= (1<<PORTB1); // Segmento A
+	if (segmentCode & (1<<6)) PORTC |= (1<<PORTC0); // Segmento A
  27a:	86 ff       	sbrs	r24, 6
  27c:	03 c0       	rjmp	.+6      	; 0x284 <activeSegments+0xa>
- 27e:	95 b1       	in	r25, 0x05	; 5
- 280:	92 60       	ori	r25, 0x02	; 2
- 282:	95 b9       	out	0x05, r25	; 5
-	if (segmentCode & (1<<5)) PORTB |= (1<<PORTB2); // Segmento B
+ 27e:	98 b1       	in	r25, 0x08	; 8
+ 280:	91 60       	ori	r25, 0x01	; 1
+ 282:	98 b9       	out	0x08, r25	; 8
+	if (segmentCode & (1<<5)) PORTC |= (1<<PORTC1); // Segmento B
  284:	85 ff       	sbrs	r24, 5
  286:	03 c0       	rjmp	.+6      	; 0x28e <activeSegments+0x14>
- 288:	95 b1       	in	r25, 0x05	; 5
- 28a:	94 60       	ori	r25, 0x04	; 4
- 28c:	95 b9       	out	0x05, r25	; 5
-	if (segmentCode & (1<<4)) PORTB |= (1<<PORTB3); // Segmento C
+ 288:	98 b1       	in	r25, 0x08	; 8
+ 28a:	92 60       	ori	r25, 0x02	; 2
+ 28c:	98 b9       	out	0x08, r25	; 8
+	if (segmentCode & (1<<4)) PORTC |= (1<<PORTC2); // Segmento C
  28e:	84 ff       	sbrs	r24, 4
  290:	03 c0       	rjmp	.+6      	; 0x298 <activeSegments+0x1e>
- 292:	95 b1       	in	r25, 0x05	; 5
- 294:	98 60       	ori	r25, 0x08	; 8
- 296:	95 b9       	out	0x05, r25	; 5
-	if (segmentCode & (1<<3)) PORTB |= (1<<PORTB4); // Segmento D
+ 292:	98 b1       	in	r25, 0x08	; 8
+ 294:	94 60       	ori	r25, 0x04	; 4
+ 296:	98 b9       	out	0x08, r25	; 8
+	if (segmentCode & (1<<3)) PORTC |= (1<<PORTC3); // Segmento D
  298:	83 ff       	sbrs	r24, 3
  29a:	03 c0       	rjmp	.+6      	; 0x2a2 <activeSegments+0x28>
- 29c:	95 b1       	in	r25, 0x05	; 5
- 29e:	90 61       	ori	r25, 0x10	; 16
- 2a0:	95 b9       	out	0x05, r25	; 5
-	if (segmentCode & (1<<2)) PORTD |= (1<<PORTD2); // Segmento E
+ 29c:	98 b1       	in	r25, 0x08	; 8
+ 29e:	98 60       	ori	r25, 0x08	; 8
+ 2a0:	98 b9       	out	0x08, r25	; 8
+	if (segmentCode & (1<<2)) PORTB |= (1<<PORTB1); // Segmento E
  2a2:	82 ff       	sbrs	r24, 2
  2a4:	03 c0       	rjmp	.+6      	; 0x2ac <activeSegments+0x32>
- 2a6:	9b b1       	in	r25, 0x0b	; 11
- 2a8:	94 60       	ori	r25, 0x04	; 4
- 2aa:	9b b9       	out	0x0b, r25	; 11
-	if (segmentCode & (1<<1)) PORTD |= (1<<PORTD3); // Segmento F
+ 2a6:	95 b1       	in	r25, 0x05	; 5
+ 2a8:	92 60       	ori	r25, 0x02	; 2
+ 2aa:	95 b9       	out	0x05, r25	; 5
+	if (segmentCode & (1<<1)) PORTB |= (1<<PORTB2); // Segmento F
  2ac:	81 ff       	sbrs	r24, 1
  2ae:	03 c0       	rjmp	.+6      	; 0x2b6 <activeSegments+0x3c>
- 2b0:	9b b1       	in	r25, 0x0b	; 11
- 2b2:	98 60       	ori	r25, 0x08	; 8
- 2b4:	9b b9       	out	0x0b, r25	; 11
-	if (segmentCode & (1<<0)) PORTD |= (1<<PORTD4); // Segmento G
+ 2b0:	95 b1       	in	r25, 0x05	; 5
+ 2b2:	94 60       	ori	r25, 0x04	; 4
+ 2b4:	95 b9       	out	0x05, r25	; 5
+	if (segmentCode & (1<<0)) PORTB |= (1<<PORTB3); // Segmento G
  2b6:	80 ff       	sbrs	r24, 0
  2b8:	03 c0       	rjmp	.+6      	; 0x2c0 <activeSegments+0x46>
- 2ba:	8b b1       	in	r24, 0x0b	; 11
- 2bc:	80 61       	ori	r24, 0x10	; 16
- 2be:	8b b9       	out	0x0b, r24	; 11
+ 2ba:	85 b1       	in	r24, 0x05	; 5
+ 2bc:	88 60       	ori	r24, 0x08	; 8
+ 2be:	85 b9       	out	0x05, r24	; 5
  2c0:	08 95       	ret
 
 000002c2 <cleanSevenSegmentDisplay>:
@@ -405,20 +405,20 @@ void activeSegments(uint8_t segmentCode) {
 
 void cleanSevenSegmentDisplay(void) {
 	// Desliga todos os segmentos
-	PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB3) | (1<<PORTB4)); // Segmentos A–D
- 2c2:	85 b1       	in	r24, 0x05	; 5
- 2c4:	81 7e       	andi	r24, 0xE1	; 225
- 2c6:	85 b9       	out	0x05, r24	; 5
-	PORTD &= ~((1<<PORTD2) | (1<<PORTD3) | (1<<PORTD4));               // Segmentos E–G
- 2c8:	8b b1       	in	r24, 0x0b	; 11
- 2ca:	83 7e       	andi	r24, 0xE3	; 227
- 2cc:	8b b9       	out	0x0b, r24	; 11
+	PORTC &= ~((1<<PORTC0) | (1<<PORTC1) | (1<<PORTC2) | (1<<PORTC3)); // Segmentos A–D
+ 2c2:	88 b1       	in	r24, 0x08	; 8
+ 2c4:	80 7f       	andi	r24, 0xF0	; 240
+ 2c6:	88 b9       	out	0x08, r24	; 8
+	PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB3));               // Segmentos E–G
+ 2c8:	85 b1       	in	r24, 0x05	; 5
+ 2ca:	81 7f       	andi	r24, 0xF1	; 241
+ 2cc:	85 b9       	out	0x05, r24	; 5
 	
 	// Desabilita todos os displays
-	PORTC &= ~((1<<PORTC0) | (1<<PORTC1) | (1<<PORTC2) | (1<<PORTC3));
- 2ce:	88 b1       	in	r24, 0x08	; 8
- 2d0:	80 7f       	andi	r24, 0xF0	; 240
- 2d2:	88 b9       	out	0x08, r24	; 8
+	PORTD &= ~((1<<PORTD2) | (1<<PORTD3) | (1<<PORTD4) | (1<<PORTD7));
+ 2ce:	8b b1       	in	r24, 0x0b	; 11
+ 2d0:	83 76       	andi	r24, 0x63	; 99
+ 2d2:	8b b9       	out	0x0b, r24	; 11
  2d4:	08 95       	ret
 
 000002d6 <showSevenSegmentDisplayValue>:
@@ -457,31 +457,31 @@ void showSevenSegmentDisplayValue(uint8_t value, uint8_t displayAddress) {
  300:	69 f0       	breq	.+26     	; 0x31c <showSevenSegmentDisplayValue+0x46>
  302:	0f c0       	rjmp	.+30     	; 0x322 <showSevenSegmentDisplayValue+0x4c>
 		case 0:
-			PORTC |= (1<<PORTC0); // Habilita display 0
- 304:	88 b1       	in	r24, 0x08	; 8
- 306:	81 60       	ori	r24, 0x01	; 1
- 308:	88 b9       	out	0x08, r24	; 8
+			PORTD |= (1<<PORTD2); // Habilita display 0
+ 304:	8b b1       	in	r24, 0x0b	; 11
+ 306:	84 60       	ori	r24, 0x04	; 4
+ 308:	8b b9       	out	0x0b, r24	; 11
 			break;
  30a:	0b c0       	rjmp	.+22     	; 0x322 <showSevenSegmentDisplayValue+0x4c>
 		case 1:
-			PORTC |= (1<<PORTC1); // Habilita display 1
- 30c:	88 b1       	in	r24, 0x08	; 8
- 30e:	82 60       	ori	r24, 0x02	; 2
- 310:	88 b9       	out	0x08, r24	; 8
+			PORTD |= (1<<PORTD3); // Habilita display 1
+ 30c:	8b b1       	in	r24, 0x0b	; 11
+ 30e:	88 60       	ori	r24, 0x08	; 8
+ 310:	8b b9       	out	0x0b, r24	; 11
 			break;
  312:	07 c0       	rjmp	.+14     	; 0x322 <showSevenSegmentDisplayValue+0x4c>
 		case 2:
-			PORTC |= (1<<PORTC2); // Habilita display 2
- 314:	88 b1       	in	r24, 0x08	; 8
- 316:	84 60       	ori	r24, 0x04	; 4
- 318:	88 b9       	out	0x08, r24	; 8
+			PORTD |= (1<<PORTD4); // Habilita display 2
+ 314:	8b b1       	in	r24, 0x0b	; 11
+ 316:	80 61       	ori	r24, 0x10	; 16
+ 318:	8b b9       	out	0x0b, r24	; 11
 			break;
  31a:	03 c0       	rjmp	.+6      	; 0x322 <showSevenSegmentDisplayValue+0x4c>
 		case 3:
-			PORTC |= (1<<PORTC3); // Habilita display 3
- 31c:	88 b1       	in	r24, 0x08	; 8
- 31e:	88 60       	ori	r24, 0x08	; 8
- 320:	88 b9       	out	0x08, r24	; 8
+			PORTD |= (1<<PORTD7); // Habilita display 3
+ 31c:	8b b1       	in	r24, 0x0b	; 11
+ 31e:	80 68       	ori	r24, 0x80	; 128
+ 320:	8b b9       	out	0x0b, r24	; 11
 			break;
 		default:
 			break; // Endereço inválido: nenhum display é habilitado

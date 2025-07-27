@@ -28,34 +28,34 @@ static uint8_t actualDisplay = 0;
 static uint8_t displaysValues[4] = {0, 0, 0, 0};
 
 void setupSevenSegmentDisplay(void) {
-	// Define os pinos PB1–PB4 como saída para os segmentos A, B, C e D
-	DDRB |= (1<<DDB1) | (1<<DDB2) | (1<<DDB3) | (1<<DDB4);
-	
-	// Define os pinos PD2–PD4 como saída para os segmentos E, F e G
-	DDRD |= (1<<DDD2) | (1<<DDD3) | (1<<DDD4);
-	
-	// Define os pinos PC0–PC3 como saída para habilitação dos displays (EN0 a EN3)
+	// Define os pinos PC0–PC3 como saída para os segmentos A, B, C e D
 	DDRC |= (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3);
+	
+	// Define os pinos PB1–PB3 como saída para os segmentos E, F e G
+	DDRB |= (1<<DDB1) | (1<<DDB2) | (1<<DDB3);
+	
+	// Define os pinos PD2, PD3, PD4 e PD7 como saída para habilitação dos displays (EN0 a EN3)
+	DDRD |= (1<<DDD2) | (1<<DDD3) | (1<<DDD4) | (1<<DDD7);
 }
 
 void activeSegments(uint8_t segmentCode) {
 	// Ativa os segmentos com base no valor binário fornecido
-	if (segmentCode & (1<<6)) PORTB |= (1<<PORTB1); // Segmento A
-	if (segmentCode & (1<<5)) PORTB |= (1<<PORTB2); // Segmento B
-	if (segmentCode & (1<<4)) PORTB |= (1<<PORTB3); // Segmento C
-	if (segmentCode & (1<<3)) PORTB |= (1<<PORTB4); // Segmento D
-	if (segmentCode & (1<<2)) PORTD |= (1<<PORTD2); // Segmento E
-	if (segmentCode & (1<<1)) PORTD |= (1<<PORTD3); // Segmento F
-	if (segmentCode & (1<<0)) PORTD |= (1<<PORTD4); // Segmento G
+	if (segmentCode & (1<<6)) PORTC |= (1<<PORTC0); // Segmento A
+	if (segmentCode & (1<<5)) PORTC |= (1<<PORTC1); // Segmento B
+	if (segmentCode & (1<<4)) PORTC |= (1<<PORTC2); // Segmento C
+	if (segmentCode & (1<<3)) PORTC |= (1<<PORTC3); // Segmento D
+	if (segmentCode & (1<<2)) PORTB |= (1<<PORTB1); // Segmento E
+	if (segmentCode & (1<<1)) PORTB |= (1<<PORTB2); // Segmento F
+	if (segmentCode & (1<<0)) PORTB |= (1<<PORTB3); // Segmento G
 }
 
 void cleanSevenSegmentDisplay(void) {
 	// Desliga todos os segmentos
-	PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB3) | (1<<PORTB4)); // Segmentos A–D
-	PORTD &= ~((1<<PORTD2) | (1<<PORTD3) | (1<<PORTD4));               // Segmentos E–G
+	PORTC &= ~((1<<PORTC0) | (1<<PORTC1) | (1<<PORTC2) | (1<<PORTC3)); // Segmentos A–D
+	PORTB &= ~((1<<PORTB1) | (1<<PORTB2) | (1<<PORTB3));               // Segmentos E–G
 	
 	// Desabilita todos os displays
-	PORTC &= ~((1<<PORTC0) | (1<<PORTC1) | (1<<PORTC2) | (1<<PORTC3));
+	PORTD &= ~((1<<PORTD2) | (1<<PORTD3) | (1<<PORTD4) | (1<<PORTD7));
 }
 
 void showSevenSegmentDisplayValue(uint8_t value, uint8_t displayAddress) {
@@ -70,16 +70,16 @@ void showSevenSegmentDisplayValue(uint8_t value, uint8_t displayAddress) {
 	// Habilita o display correspondente ao endereço fornecido
 	switch(displayAddress){
 		case 0:
-			PORTC |= (1<<PORTC0); // Habilita display 0
+			PORTD |= (1<<PORTD2); // Habilita display 0
 			break;
 		case 1:
-			PORTC |= (1<<PORTC1); // Habilita display 1
+			PORTD |= (1<<PORTD3); // Habilita display 1
 			break;
 		case 2:
-			PORTC |= (1<<PORTC2); // Habilita display 2
+			PORTD |= (1<<PORTD4); // Habilita display 2
 			break;
 		case 3:
-			PORTC |= (1<<PORTC3); // Habilita display 3
+			PORTD |= (1<<PORTD7); // Habilita display 3
 			break;
 		default:
 			break; // Endereço inválido: nenhum display é habilitado

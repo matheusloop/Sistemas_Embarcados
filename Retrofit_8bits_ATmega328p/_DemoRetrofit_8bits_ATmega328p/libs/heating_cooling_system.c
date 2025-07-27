@@ -48,8 +48,8 @@ void setupHeatingCoolingSystem(void){
 	TCCR0B |= (0<<FOC0A)  | (0<<FOC0B)  | (0<<WGM02)  | (0<<CS02)   | (1<<CS01)  | (1<<CS00);
 
 	// Inicializa os dois canais com 0% de duty cycle (desligados)
-	OCR0A = 0; // Aquecedor (canal A – PD6)
-	OCR0B = 0; // Resfriador (canal B – PD5)
+	OCR0A = 0; // Resfriador (canal A – PD6)
+	OCR0B = 0; // Aquecedor (canal B – PD5)
 	
 	
 	/*-----------------------------------------------------------------*/
@@ -93,12 +93,12 @@ void setupHeatingCoolingSystem(void){
 
 // Ajusta o duty cycle do aquecedor com base no valor percentual (0–100%)
 void setHeaterDutyCycle(uint8_t heaterDutyCycle){
-	OCR0A = (255 * (uint16_t)heaterDutyCycle) / 100;
+	OCR0B = (255 * (uint16_t)heaterDutyCycle) / 100;
 }
 
 // Ajusta o duty cycle do resfriador com base no valor percentual (0–100%)
 void setCoolerDutyCycle(uint8_t coolerDutyCycle){
-	OCR0B = (255 * (uint16_t)coolerDutyCycle) / 100;
+	OCR0A = (255 * (uint16_t)coolerDutyCycle) / 100;
 }
 
 uint16_t getTemperatureSensorLevel(void){
